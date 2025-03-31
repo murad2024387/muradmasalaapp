@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراد مسالا - اسٽاڪ مينجمنٽ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Stock Management Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .stock-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 10px;
+        }
+        
+        .stock-header h2 {
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .stock-search {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 30px;
+            width: 300px;
+        }
+        
+        .stock-search i {
+            color: #7f8c8d;
+            margin-left: 10px;
+        }
+        
+        .stock-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .stock-table th {
+            background-color: #e67e22;
+            color: white;
+            padding: 12px;
+            text-align: right;
+        }
+        
+        .stock-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+        }
+        
+        .stock-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .status-in-stock {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-low-stock {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-out-of-stock {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .stock-actions {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .btn-stock {
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .btn-stock-add {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-stock-remove {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-stock:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+        
+        .stock-quantity {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .stock-alert {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+        
+        /* Modal Styles */
+        .stock-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .stock-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .stock-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stock-modal-header h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .stock-modal-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .stock-form-group {
+            margin-bottom: 15px;
+        }
+        
+        .stock-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .stock-form-group input,
+        .stock-form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .stock-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background-color: #e67e22;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="stock-container">
+        <div class="stock-header">
+            <h2><i class="fas fa-boxes"></i> اسٽاڪ مينجمنٽ</h2>
+            <div class="stock-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="stockSearch" placeholder="پراڊڪٽ ڳوليو...">
+            </div>
+        </div>
+        
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>پراڊڪٽ تصوير</th>
+                    <th>پراڊڪٽ جو نالو</th>
+                    <th>قسم</th>
+                    <th>قيمت</th>
+                    <th>اسٽاڪ</th>
+                    <th>عمل</th>
+                </tr>
+            </thead>
+            <tbody id="stockTableBody">
+                <!-- Products will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Add Stock Modal -->
+    <div id="addStockModal" class="stock-modal">
+        <div class="stock-modal-content">
+            <div class="stock-modal-header">
+                <h3 id="modalStockTitle">اسٽاڪ شامل ڪريو</h3>
+                <span class="stock-modal-close" onclick="closeStockModal()">&times;</span>
+            </div>
+            <form id="stockForm">
+                <input type="hidden" id="stockProductId">
+                <div class="stock-form-group">
+                    <label for="stockQuantity">مقدار</label>
+                    <input type="number" id="stockQuantity" min="1" value="1" required>
+                </div>
+                <div class="stock-form-group">
+                    <label for="stockType">قسم</label>
+                    <select id="stockType" required>
+                        <option value="purchase">خريداري</option>
+                        <option value="adjustment">ايڊجسٽمينٽ</option>
+                        <option value="return">واپسي</option>
+                    </select>
+                </div>
+                <div class="stock-form-group">
+                    <label for="stockNotes">نوٽس</label>
+                    <input type="text" id="stockNotes" placeholder="اختياري">
+                </div>
+                <div class="stock-form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeStockModal()">منسوخ ڪريو</button>
+                    <button type="submit" class="btn btn-primary">محفوظ ڪريو</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample Product Data
+        const products = [
+            {
+                id: 'prod_1',
+                name: 'لال مرچ',
+                image: 'https://via.placeholder.com/50',
+                category: 'مسالا',
+                price: 120,
+                stock: 45,
+                minStock: 10
+            },
+            {
+                id: 'prod_2',
+                name: 'ڪاري مرچ',
+                image: 'https://via.placeholder.com/50',
+                category: 'مسالا',
+                price: 180,
+                stock: 8,
+                minStock: 5
+            },
+            {
+                id: 'prod_3',
+                name: 'هڊو',
+                image: 'https://via.placeholder.com/50',
+                category: 'مسالا',
+                price: 250,
+                stock: 0,
+                minStock: 3
+            },
+            {
+                id: 'prod_4',
+                name: 'دڻيا',
+                image: 'https://via.placeholder.com/50',
+                category: 'مسالا',
+                price: 90,
+                stock: 22,
+                minStock: 5
+            }
+        ];
+
+        // Load Products into Table
+        function loadStockTable() {
+            const tableBody = document.getElementById('stockTableBody');
+            tableBody.innerHTML = '';
+            
+            products.forEach(product => {
+                const stockStatus = getStockStatus(product.stock, product.minStock);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="${product.image}" alt="${product.name}" width="50"></td>
+                    <td>${product.name}</td>
+                    <td>${product.category}</td>
+                    <td>₹${product.price.toFixed(2)}</td>
+                    <td>
+                        <div class="stock-quantity">${product.stock} ڪلو</div>
+                        ${product.stock < product.minStock ? 
+                          `<div class="stock-alert">گھٽ ۾ گھٽ اسٽاڪ: ${product.minStock} ڪلو</div>` : ''}
+                    </td>
+                    <td>
+                        <span class="status-badge ${stockStatus.class}">${stockStatus.status}</span>
+                        <div class="stock-actions">
+                            <button class="btn-stock btn-stock-add" data-product-id="${product.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-stock btn-stock-remove" data-product-id="${product.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Add event listeners to buttons
+            document.querySelectorAll('.btn-stock-add').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    openAddStockModal(productId, 'add');
+                });
+            });
+            
+            document.querySelectorAll('.btn-stock-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    openAddStockModal(productId, 'remove');
+                });
+            });
+        }
+        
+        // Determine stock status
+        function getStockStatus(currentStock, minStock) {
+            if (currentStock === 0) {
+                return { status: 'ختم ٿي ويو', class: 'status-out-of-stock' };
+            } else if (currentStock <= minStock) {
+                return { status: 'گھٽ اسٽاڪ', class: 'status-low-stock' };
+            } else {
+                return { status: 'اسٽاڪ ۾', class: 'status-in-stock' };
+            }
+        }
+        
+        // Open Add Stock Modal
+        function openAddStockModal(productId, action) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const modal = document.getElementById('addStockModal');
+            const title = document.getElementById('modalStockTitle');
+            const form = document.getElementById('stockForm');
+            
+            document.getElementById('stockProductId').value = productId;
+            
+            if (action === 'add') {
+                title.textContent = `${product.name} ۾ اسٽاڪ شامل ڪريو`;
+                form.dataset.action = 'add';
+            } else {
+                title.textContent = `${product.name} مان اسٽاڪ گھٽائيو`;
+                form.dataset.action = 'remove';
+            }
+            
+            modal.style.display = 'block';
+        }
+        
+        // Close Stock Modal
+        function closeStockModal() {
+            document.getElementById('addStockModal').style.display = 'none';
+        }
+        
+        // Handle Stock Form Submission
+        document.getElementById('stockForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const productId = document.getElementById('stockProductId').value;
+            const quantity = parseInt(document.getElementById('stockQuantity').value);
+            const type = document.getElementById('stockType').value;
+            const notes = document.getElementById('stockNotes').value;
+            const action = this.dataset.action;
+            
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            if (action === 'add') {
+                product.stock += quantity;
+            } else {
+                product.stock = Math.max(0, product.stock - quantity);
+            }
+            
+            // Here you would typically save to database
+            console.log(`Stock ${action === 'add' ? 'added' : 'removed'}:`, {
+                productId,
+                quantity,
+                type,
+                notes,
+                newStock: product.stock,
+                date: new Date().toISOString()
+            });
+            
+            loadStockTable();
+            closeStockModal();
+        });
+        
+        // Search Functionality
+        document.getElementById('stockSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#stockTableBody tr');
+            
+            rows.forEach(row => {
+                const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const productCategory = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                
+                if (productName.includes(searchTerm) || productCategory.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('addStockModal');
+            if (event.target === modal) {
+                closeStockModal();
+            }
+        });
+        
+        // Initialize
+        loadStockTable();
+    </script>
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراد مسالا - گراھڪ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/customers.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Customer specific styles */
+        .customers-section {
+            margin: 20px;
+        }
+        
+        .customer-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .customer-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .customer-avatar {
+            width: 50px;
+            height: 50px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        .customer-name {
+            font-weight: bold;
+        }
+        
+        .customer-phone {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .customer-balance {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .customer-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            color: #7f8c8d;
+        }
+        
+        .customer-actions button:hover {
+            color: #3498db;
+        }
+        
+        /* Modal styles */
+        .modal-content.small {
+            max-width: 500px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .badge-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-pepper-hot"></i>
+            <span>مراد مسالا</span>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMenu()" style="background: transparent; border: none; cursor: pointer;">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="#2C3E50" xmlns="http://www.w3.org/2000/svg">
+                <rect y="6" width="30" height="3" rx="1.5" />
+                <rect y="13" width="30" height="3" rx="1.5" />
+                <rect y="20" width="30" height="3" rx="1.5" />
+            </svg>
+        </button>
+        
+        <nav id="mainNav">
+            <div class="nav-category">
+                <a href="index.html" class="nav-btn">
+                    <i class="fas fa-home"></i>
+                    <span>ڊش بورڊ</span>
+                </a>
+                <a href="customers.html" class="nav-btn active">
+                    <i class="fas fa-users"></i>
+                    <span>گاهڪا</span>
+                </a>
+                <a href="products.html" class="nav-btn">
+                    <i class="fas fa-boxes"></i>
+                    <span>پراڊڪٽس</span>
+                </a>
+                <a href="suppliers.html" class="nav-btn">
+                    <i class="fas fa-truck"></i>
+                    <span>سپلائرز</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="customers-section">
+            <div class="section-header">
+                <h2><i class="fas fa-users"></i> گراھڪ مينجمنٽ</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" id="addCustomerBtn">
+                        <i class="fas fa-plus"></i> نئون گراھڪ
+                    </button>
+                    <button class="btn btn-success" id="exportBtn">
+                        <i class="fas fa-file-export"></i> برآمد
+                    </button>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="customerSearch" placeholder="گراھڪ ڳوليو...">
+            </div>
+            
+            <div id="customersList">
+                <!-- Customers will be loaded here via JavaScript -->
+                <div class="loader">لوڊ ڪري رهيو آهي...</div>
+            </div>
+        </section>
+        
+        <!-- Customer Modal -->
+        <div class="modal" id="customerModal">
+            <div class="modal-content small">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modalTitle"><i class="fas fa-user-plus"></i> نئون گراھڪ شامل ڪريو</h3>
+                
+                <form id="customerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">گراھڪ جو نالو*</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">فون نمبر*</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerType">قسم</label>
+                            <select id="customerType">
+                                <option value="retail">ريٽيل</option>
+                                <option value="wholesale">وڪريو</option>
+                                <option value="restaurant">هوٽل</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerStatus">اسٽيٽس</label>
+                            <select id="customerStatus">
+                                <option value="active">اڪٽو</option>
+                                <option value="inactive">غير اڪٽو</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerAddress">پتو</label>
+                        <textarea id="customerAddress" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerNotes">نوٽس</label>
+                        <textarea id="customerNotes" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> محفوظ ڪريو
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">
+                            <i class="fas fa-times"></i> منسوخ ڪريو
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Delete Confirmation Modal -->
+        <div class="modal" id="deleteCustomerModal">
+            <div class="modal-content small">
+                <h3><i class="fas fa-exclamation-triangle"></i> گراھڪ ڊليٽ ڪريو</h3>
+                <p>ڇا توهان پڪ آهيو ته توهان هن گراھڪ کي ڊليٽ ڪرڻ چاهيو ٿا؟ <strong id="deleteCustomerName"></strong></p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="confirmCustomerDelete">هاڻ، ڊليٽ ڪريو</button>
+                    <button class="btn btn-outline" onclick="closeModal()">منسوخ ڪريو</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Customer Transactions Modal -->
+        <div class="modal" id="transactionsModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3><i class="fas fa-exchange-alt"></i> گراھڪ جي لین دین <span id="customerTransactionsName"></span></h3>
+                
+                <div class="search-box" style="margin-bottom: 15px;">
+                    <i class="fas fa-search"></<i></i>>
+                    <input type="text" id="transactionSearch" placeholder="لین دین ڳوليو...">
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="transactionsTable">
+                        <thead>
+                            <tr>
+                                <th>تاريخ</th>
+                                <th>انوائس نمبر</th>
+                                <th>وضاحت</th>
+                                <th>رقم</th>
+                                <th>باقي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="total-summary" style="margin-top: 20px;">
+                    <div class="total-row">
+                        <span>ڪل خرچ:</span>
+                        <span id="totalDebit">₹0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>ڪل ادائيگي:</span>
+                        <span id="totalCredit">₹0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>باقي رقم:</span>
+                        <span id="currentBalance">₹0.00</span>
+                    </div>
+                </div>
+                
+                <div class="form-actions" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="addPaymentBtn">
+                        <i class="fas fa-money-bill-wave"></i> ادائيگي شامل ڪريو
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Modal -->
+        <div class="modal" id="paymentModal">
+            <div class="modal-content small">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3><i class="fas fa-money-bill-wave"></i> ادائيگي شامل ڪريو</h3>
+                
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="paymentAmount">رقم*</label>
+                        <input type="number" id="paymentAmount" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentDate">تاريخ*</label>
+                        <input type="date" id="paymentDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentMethod">طريقو*</label>
+                        <select id="paymentMethod" required>
+                            <option value="cash">نقد</option>
+                            <option value="bank">بئنڪ</option>
+                            <option value="cheque">چيڪ</option>
+                            <option value="mobile">موبائيل پئمنٽ</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentReference">ريفرينس</label>
+                        <input type="text" id="paymentReference">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentNotes">نوٽس</label>
+                        <textarea id="paymentNotes" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> محفوظ ڪريو
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">
+                            <i class="fas fa-times"></i> منسوخ ڪريو
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Customer Management System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Local Storage Functions
+            function getCustomers() {
+                const customers = localStorage.getItem('muradMasalaCustomers');
+                return customers ? JSON.parse(customers) : [];
+            }
+            
+            function saveCustomers(customers) {
+                localStorage.setItem('muradMasalaCustomers', JSON.stringify(customers));
+            }
+            
+            function getTransactions() {
+                const transactions = localStorage.getItem('muradMasalaTransactions');
+                return transactions ? JSON.parse(transactions) : [];
+            }
+            
+            function saveTransactions(transactions) {
+                localStorage.setItem('muradMasalaTransactions', JSON.stringify(transactions));
+            }
+            
+            // Load Customers
+            function loadCustomers() {
+                const customers = getCustomers();
+                const customersList = document.getElementById('customersList');
+                
+                if (customers.length === 0) {
+                    customersList.innerHTML = '<div class="empty-state">ڪوبه گراھڪ شامل نه ڪيو ويو آهي</div>';
+                    return;
+                }
+                
+                let html = '';
+                customers.forEach(customer => {
+                    // Get customer balance
+                    const balance = getCustomerBalance(customer.id);
+                    
+                    html += `
+                        <div class="customer-card" data-id="${customer.id}">
+                            <div class="customer-info">
+                                <div class="customer-avatar">
+                                    ${customer.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <div class="customer-name">${customer.name}</div>
+                                    <div class="customer-phone">${customer.phone}</div>
+                                </div>
+                            </div>
+                            <div class="customer-balance">₹${balance.toFixed(2)}</div>
+                            <div class="customer-actions">
+                                <button onclick="viewTransactions('${customer.id}')" title="لین دین">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button onclick="editCustomer('${customer.id}')" title="ايڊٽ">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="showDeleteCustomerModal('${customer.id}')" title="ڊليٽ">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                customersList.innerHTML = html;
+            }
+            
+            // Get Customer Balance
+            function getCustomerBalance(customerId) {
+                const transactions = getTransactions().filter(t => t.customerId === customerId);
+                let balance = 0;
+                
+                transactions.forEach(transaction => {
+                    if (transaction.type === 'sale') {
+                        balance += transaction.amount;
+                    } else if (transaction.type === 'payment') {
+                        balance -= transaction.amount;
+                    }
+                });
+                
+                return balance;
+            }
+            
+            // Add/Update Customer
+            window.addOrUpdateCustomer = function(customerData, isEdit = false) {
+                const customers = getCustomers();
+                
+                if (isEdit) {
+                    const index = customers.findIndex(c => c.id === customerData.id);
+                    if (index !== -1) {
+                        customers[index] = customerData;
+                    }
+                } else {
+                    customerData.id = 'cust_' + Date.now();
+                    customers.push(customerData);
+                }
+                
+                saveCustomers(customers);
+                loadCustomers();
+                closeModal();
+            };
+            
+            // Edit Customer
+            window.editCustomer = function(customerId) {
+                const customers = getCustomers();
+                const customer = customers.find(c => c.id === customerId);
+                
+                if (customer) {
+                    document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> گراھڪ اپڊيٽ ڪريو';
+                    document.getElementById('customerName').value = customer.name;
+                    document.getElementById('customerPhone').value = customer.phone;
+                    document.getElementById('customerType').value = customer.type || 'retail';
+                    document.getElementById('customerStatus').value = customer.status || 'active';
+                    document.getElementById('customerAddress').value = customer.address || '';
+                    document.getElementById('customerNotes').value = customer.notes || '';
+                    
+                    document.getElementById('customerForm').dataset.customerId = customer.id;
+                    openModal('customerModal');
+                }
+            };
+            
+            // Delete Customer
+            window.deleteCustomer = function(customerId) {
+                const customers = getCustomers().filter(c => c.id !== customerId);
+                saveCustomers(customers);
+                loadCustomers();
+                closeModal();
+            };
+            
+            // Show Delete Confirmation
+            window.showDeleteCustomerModal = function(customerId) {
+                const customers = getCustomers();
+                const customer = customers.find(c => c.id === customerId);
+                
+                if (customer) {
+                    document.getElementById('deleteCustomerName').textContent = customer.name;
+                    document.getElementById('confirmCustomerDelete').onclick = function() {
+                        deleteCustomer(customerId);
+                    };
+                    openModal('deleteCustomerModal');
+                }
+            };
+            
+            // View Transactions
+            window.viewTransactions = function(customerId) {
+                const customers = getCustomers();
+                const customer = customers.find(c => c.id === customerId);
+                
+                if (customer) {
+                    document.getElementById('customerTransactionsName').textContent = customer.name;
+                    loadCustomerTransactions(customerId);
+                    openModal('transactionsModal');
+                }
+            };
+            
+            // Load Customer Transactions
+            function loadCustomerTransactions(customerId) {
+                const transactions = getTransactions().filter(t => t.customerId === customerId);
+                const tbody = document.querySelector('#transactionsTable tbody');
+                tbody.innerHTML = '';
+                
+                let totalDebit = 0;
+                let totalCredit = 0;
+                
+                transactions.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    
+                    if (transaction.type === 'sale') {
+                        totalDebit += transaction.amount;
+                        row.innerHTML = `
+                            <td>${new Date(transaction.date).toLocaleDateString('sd')}</td>
+                            <td>${transaction.invoiceNumber || '-'}</td>
+                            <td>بل</td>
+                            <td style="color: #e74c3c;">₹${transaction.amount.toFixed(2)}</td>
+                            <td>₹${transaction.balance.toFixed(2)}</td>
+                        `;
+                    } else {
+                        totalCredit += transaction.amount;
+                        row.innerHTML = `
+                            <td>${new Date(transaction.date).toLocaleDateString('sd')}</td>
+                            <td>${transaction.reference || '-'}</td>
+                            <td>ادائيگي</td>
+                            <td style="color: #27ae60;">-₹${transaction.amount.toFixed(2)}</td>
+                            <td>₹${transaction.balance.toFixed(2)}</td>
+                        `;
+                    }
+                    
+                    tbody.appendChild(row);
+                });
+                
+                document.getElementById('totalDebit').textContent = `₹${totalDebit.toFixed(2)}`;
+                document.getElementById('totalCredit').textContent = `₹${totalCredit.toFixed(2)}`;
+                document.getElementById('currentBalance').textContent = `₹${(totalDebit - totalCredit).toFixed(2)}`;
+            }
+            
+            // Add Payment
+            document.getElementById('addPaymentBtn').addEventListener('click', function() {
+                const customerName = document.getElementById('customerTransactionsName').textContent;
+                const customerId = document.querySelector('.customer-card[data-id]').dataset.id;
+                
+                document.getElementById('paymentForm').dataset.customerId = customerId;
+                document.getElementById('paymentDate').value = new Date().toISOString().split('T')[0];
+                openModal('paymentModal');
+            });
+            
+            // Form Submissions
+            document.getElementById('customerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const customerId = this.dataset.customerId;
+                const isEdit = !!customerId;
+                
+                const customerData = {
+                    id: customerId || 'cust_' + Date.now(),
+                    name: document.getElementById('customerName').value,
+                    phone: document.getElementById('customerPhone').value,
+                    type: document.getElementById('customerType').value,
+                    status: document.getElementById('customerStatus').value,
+                    address: document.getElementById('customerAddress').value,
+                    notes: document.getElementById('customerNotes').value,
+                    createdAt: new Date().toISOString()
+                };
+                
+                addOrUpdateCustomer(customerData, isEdit);
+            });
+            
+            document.getElementById('paymentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const customerId = this.dataset.customerId;
+                const amount = parseFloat(document.getElementById('paymentAmount').value);
+                const date = document.getElementById('paymentDate').value;
+                const method = document.getElementById('paymentMethod').value;
+                const reference = document.getElementById('paymentReference').value;
+                const notes = document.getElementById('paymentNotes').value;
+                
+                if (!customerId || isNaN(amount)) {
+                    alert('مهرباني ڪري سڀ ضروري معلومات داخل ڪريو');
+                    return;
+                }
+                
+                // Get current balance
+                const currentBalance = getCustomerBalance(customerId);
+                const newBalance = currentBalance - amount;
+                
+                // Create transaction
+                const transactions = getTransactions();
+                transactions.push({
+                    id: 'txn_' + Date.now(),
+                    customerId,
+                    type: 'payment',
+                    amount,
+                    date,
+                    method,
+                    reference,
+                    notes,
+                    balance: newBalance,
+                    createdAt: new Date().toISOString()
+                });
+                
+                saveTransactions(transactions);
+                loadCustomerTransactions(customerId);
+                closeModal();
+                loadCustomers(); // Refresh customer list to update balances
+            });
+            
+            // Search Customers
+            document.getElementById('customerSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.customer-card');
+                
+                cards.forEach(card => {
+                    const name = card.querySelector('.customer-name').textContent.toLowerCase();
+                    const phone = card.querySelector('.customer-phone').textContent.toLowerCase();
+                    card.style.display = (name.includes(searchTerm) || phone.includes(searchTerm) ? '' : 'none';
+                });
+            });
+            
+            // Sample Data
+            if (getCustomers().length === 0) {
+                const sampleCustomers = [
+                    {
+                        id: 'cust_1',
+                        name: 'عامر هوٽل',
+                        phone: '03001234567',
+                        type: 'restaurant',
+                        status: 'active',
+                        address: 'حيدرآباد، سنڌ',
+                        notes: 'هفتيوار ادائيگي',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'cust_2',
+                        name: 'سنڌ ڪيتين',
+                        phone: '03111234567',
+                        type: 'wholesale',
+                        status: 'active',
+                        address: 'ڪراچي، سنڌ',
+                        notes: 'ماهوار ادائيگي',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                
+                saveCustomers(sampleCustomers);
+            }
+            
+            // Initialize
+            loadCustomers();
+        });
+        
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+        
+        // Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+        }
+        .section h2 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #3498db;
+        }
+    </style>
+
+    <div class="container">
+        <h1>ڪسٽمر مينجمنٽ رپورٽون</h1>
+        
+        <div class="section">
+            <h2>1. ڪسٽمرن جي جامع رپورٽ</h2>
+            <p>• <span class="highlight">ڪل رجسٽرڊ ڪسٽمر</span>: 1,250 (گذريل مهيني ۾ 5% واڌ)</p>
+            <p>• <span class="highlight">نئون/واپس ايندڙ ڪسٽمر</span>: 70% نئون، 30% واپسي</p>
+        </div>
+        
+        <div class="section">
+            <h2>2. رابطا ۽ سپورٽ لاگ</h2>
+            <p>• <span class="highlight">شڪايتون</span>: 45 (ادائيگي جا 60% مسئلا)</p>
+            <p>• <span class="highlight">اوسط ريٽنگ</span>: 4.2 ★</p>
+        </div>
+        
+        <!-- باقي سيڪشنون هنئ ريت شامل ڪريو -->
+    </div>
+    <script>
+      // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>
+  

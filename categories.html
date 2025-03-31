@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراد مسالا - ڪيٽيگري</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #e67e22;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+        }
+        
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        .nav-category {
+            display: flex;
+        }
+        
+        .nav-btn {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .nav-btn i {
+            margin-left: 8px;
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        .user-menu {
+            position: relative;
+        }
+        
+        .user-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            display: none;
+            z-index: 1001;
+        }
+        
+        .user-dropdown a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .user-dropdown a:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .user-dropdown a i {
+            margin-left: 8px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 5px 0;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 70px;
+            padding: 20px;
+        }
+        
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .section-header h2 i {
+            margin-left: 10px;
+            color: #e67e22;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #e67e22;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #d35400;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+        
+        .btn-outline:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Search Box */
+        .search-box {
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .search-box i {
+            margin-left: 10px;
+            color: #95a5a6;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            background: transparent;
+        }
+        
+        /* Category Cards */
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: #e67e22;
+        }
+        
+        .category-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .category-products {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .category-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            color: #7f8c8d;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .category-actions button:hover {
+            color: #e74c3c;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #95a5a6;
+        }
+        
+        .empty-state i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #bdc3c7;
+        }
+        
+        /* Loader */
+        .loader {
+            text-align: center;
+            padding: 20px;
+            color: #95a5a6;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .modal-content.small {
+            max-width: 400px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #95a5a6;
+        }
+        
+        .modal h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #333;
+        }
+        
+        .modal h3 i {
+            margin-left: 10px;
+            color: #e67e22;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .form-actions button {
+            margin-left: 10px;
+        }
+        
+        /* Modal Actions */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .modal-actions button {
+            margin-left: 10px;
+        }
+        
+        /* Text Colors */
+        .text-warning {
+            color: #e67e22;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .text-warning i {
+            margin-left: 5px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #e67e22;
+                padding: 10px 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            
+            .nav-category {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-btn {
+                margin: 5px 0;
+                justify-content: flex-end;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-header .actions {
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            .section-header .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <i class="fas fa-pepper-hot"></i>
+    <span>مراد مسالا</span>
+  </div>
+  
+  <button class="menu-toggle" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <nav id="mainNav">
+    <div class="nav-category">
+      <a href="index.html" class="nav-btn">
+        <i class="fas fa-home"></i>
+        <span>ڊش بورڊ</span>
+      </a>
+      <a href="products.html" class="nav-btn">
+        <i class="fas fa-boxes"></i>
+        <span>پراڊڪٽس</span>
+      </a>
+      <a href="categories.html" class="nav-btn active">
+        <i class="fas fa-tags"></i>
+        <span>ڪيٽيگري</span>
+      </a>
+      <a href="orders.html" class="nav-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>آرڊر</span>
+      </a>
+      <a href="customers.html" class="nav-btn">
+        <i class="fas fa-users"></i>
+        <span>گاھڪ</span>
+      </a>
+    </div>
+  </nav>
+  
+  <div class="user-menu">
+    <button class="user-btn" onclick="toggleUserMenu()">
+      <i class="fas fa-user-circle"></i>
+    </button>
+    <div class="user-dropdown" id="userDropdown">
+      <a href="profile.html"><i class="fas fa-user"></i> پروفائل</a>
+      <a href="settings.html"><i class="fas fa-cog"></i> سيٽنگز</a>
+      <div class="dropdown-divider"></div>
+      <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> لاگ آؤٽ</a>
+    </div>
+  </div>
+</header>
+    <main>
+        <section class="categories-section">
+            <div class="section-header">
+                <h2><i class="fas fa-tags"></i> ڪيٽيگري مينجمنٽ</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" id="addCategoryBtn">
+                        <i class="fas fa-plus"></i> نئون ڪيٽيگري
+                    </button>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="categorySearch" placeholder="ڪيٽيگري ڳوليو...">
+            </div>
+            
+            <div id="categoriesList">
+                <!-- Categories will be loaded here via JavaScript -->
+                <div class="loader">لوڊ ڪري رهيو آهي...</div>
+            </div>
+        </section>
+        
+        <!-- Category Modal -->
+        <div class="modal" id="categoryModal">
+            <div class="modal-content small">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modalTitle"><i class="fas fa-tag"></i> نئون ڪيٽيگري شامل ڪريو</h3>
+                
+                <form id="categoryForm">
+                    <div class="form-group">
+                        <label for="categoryName">ڪيٽيگري جو نالو*</label>
+                        <input type="text" id="categoryName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoryIcon">آئيڪون</label>
+                        <select id="categoryIcon">
+                            <option value="pepper-hot">مرچ (fas fa-pepper-hot)</option>
+                            <option value="spa">پتو (fas fa-spa)</option>
+                            <option value="seedling">ڪڻڪ (fas fa-seedling)</option>
+                            <option value="mortar-pestle">هڻڻ وارو (fas fa-mortar-pestle)</option>
+                            <option value="flask">بوتل (fas fa-flask)</option>
+                            <option value="leaf">پن (fas fa-leaf)</option>
+                            <option value="wheat">ڪڻڪ (fas fa-wheat-alt)</option>
+                            <option value="spray-can">اسپري (fas fa-spray-can)</option>
+                            <option value="wine-bottle">بوتل (fas fa-wine-bottle)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoryDesc">وضاحت</label>
+                        <textarea id="categoryDesc" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> محفوظ ڪريو
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="closeModal()">
+                            <i class="fas fa-times"></i> منسوخ ڪريو
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Delete Confirmation Modal -->
+        <div class="modal" id="deleteCategoryModal">
+            <div class="modal-content small">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3><i class="fas fa-exclamation-triangle"></i> ڪيٽيگري ڊليٽ ڪريو</h3>
+                <p>ڇا توهان پڪ آهيو ته توهان هن ڪيٽيگري کي ڊليٽ ڪرڻ چاهيو ٿا؟ <strong id="deleteCategoryName"></strong></p>
+                <p class="text-warning"><i class="fas fa-info-circle"></i> انتباه: هن ڪيٽيگري سان لاڳاپيل سڀ پراڊڪٽس کي به هٽايو ويندو.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="confirmCategoryDelete">هاڻ، ڊليٽ ڪريو</button>
+                    <button class="btn btn-outline" onclick="closeModal()">منسوخ ڪريو</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Category Management System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Local Storage Functions
+            function getCategories() {
+                const categories = localStorage.getItem('muradMasalaCategories');
+                return categories ? JSON.parse(categories) : [];
+            }
+            
+            function saveCategories(categories) {
+                localStorage.setItem('muradMasalaCategories', JSON.stringify(categories));
+            }
+            
+            function getProducts() {
+                const products = localStorage.getItem('muradMasalaProducts');
+                return products ? JSON.parse(products) : [];
+            }
+            
+            // Load Categories
+            function loadCategories() {
+                const categories = getCategories();
+                const categoriesList = document.getElementById('categoriesList');
+                
+                if (categories.length === 0) {
+                    categoriesList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-tags"></i>
+                            <p>ڪوبه ڪيٽيگري شامل نه ڪيو ويو آهي</p>
+                            <button class="btn btn-primary" id="addFirstCategoryBtn">
+                                <i class="fas fa-plus"></i> نئون ڪيٽيگري شامل ڪريو
+                            </button>
+                        </div>
+                    `;
+                    
+                    document.getElementById('addFirstCategoryBtn').addEventListener('click', function() {
+                        document.getElementById('addCategoryBtn').click();
+                    });
+                    return;
+                }
+                
+                const products = getProducts();
+                
+                let html = '';
+                categories.forEach(category => {
+                    const productCount = products.filter(p => p.category === category.id).length;
+                    
+                    html += `
+                        <div class="category-card" data-id="${category.id}">
+                            <div class="category-info">
+                                <div class="category-icon">
+                                    <i class="fas fa-${category.icon || 'tag'}"></i>
+                                </div>
+                                <div>
+                                    <div class="category-name">${category.name}</div>
+                                    <div class="category-products">${productCount} پراڊڪٽس</div>
+                                </div>
+                            </div>
+                            <div class="category-actions">
+                                <button onclick="editCategory('${category.id}')"><i class="fas fa-edit"></i></button>
+                                <button onclick="showDeleteCategoryModal('${category.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                categoriesList.innerHTML = html;
+            }
+            
+            // Add/Update Category Function
+            window.addOrUpdateCategory = function(categoryData, isEdit = false) {
+                const categories = getCategories();
+                
+                if (isEdit) {
+                    const index = categories.findIndex(c => c.id === categoryData.id);
+                    if (index !== -1) {
+                        categories[index] = categoryData;
+                    }
+                } else {
+                    categoryData.id = 'cat_' + Date.now();
+                    categories.push(categoryData);
+                }
+                
+                saveCategories(categories);
+                loadCategories();
+                closeModal();
+                
+                // Show success message
+                alert(`ڪيٽيگري ڪاميابي سان ${isEdit ? 'اپڊيٽ' : 'شامل'} ڪيو ويو آهي`);
+            };
+            
+            // Edit Category Function
+            window.editCategory = function(categoryId) {
+                const categories = getCategories();
+                const category = categories.find(c => c.id === categoryId);
+                
+                if (category) {
+                    document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> ڪيٽيگري اپڊيٽ ڪريو';
+                    document.getElementById('categoryName').value = category.name;
+                    document.getElementById('categoryIcon').value = category.icon || 'pepper-hot';
+                    document.getElementById('categoryDesc').value = category.description || '';
+                    
+                    document.getElementById('categoryForm').dataset.categoryId = category.id;
+                    openModal('categoryModal');
+                }
+            };
+            
+            // Delete Category Function
+            window.deleteCategory = function(categoryId) {
+                // Remove category
+                const categories = getCategories().filter(c => c.id !== categoryId);
+                saveCategories(categories);
+                
+                // Remove products associated with this category
+                const products = getProducts().filter(p => p.category !== categoryId);
+                localStorage.setItem('muradMasalaProducts', JSON.stringify(products));
+                
+                loadCategories();
+                closeModal();
+                
+                // Show success message
+                alert('ڪيٽگري ڪاميابي سان ڊليٽ ڪيو ويو آهي');
+            };
+            
+            // Show Delete Confirmation Modal
+            window.showDeleteCategoryModal = function(categoryId) {
+                const categories = getCategories();
+                const category = categories.find(c => c.id === categoryId);
+                
+                if (category) {
+                    document.getElementById('deleteCategoryName').textContent = category.name;
+                    document.getElementById('confirmCategoryDelete').onclick = function() {
+                        deleteCategory(categoryId);
+                    };
+                    openModal('deleteCategoryModal');
+                }
+            };
+            
+            // Form Submission Handler
+            document.getElementById('categoryForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const categoryId = this.dataset.categoryId;
+                const isEdit = !!categoryId;
+                
+                const categoryName = document.getElementById('categoryName').value.trim();
+                if (!categoryName) {
+                    alert('مهرباني ڪري ڪيٽيگري جو نالو داخل ڪريو');
+                    return;
+                }
+                
+                const categoryData = {
+                    id: categoryId || 'cat_' + Date.now(),
+                    name: categoryName,
+                    icon: document.getElementById('categoryIcon').value,
+                    description: document.getElementById('categoryDesc').value.trim()
+                };
+                
+                addOrUpdateCategory(categoryData, isEdit);
+            });
+            
+            // Search Functionality
+            document.getElementById('categorySearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.category-card');
+                
+                cards.forEach(card => {
+                    const name = card.querySelector('.category-name').textContent.toLowerCase();
+                    card.style.display = name.includes(searchTerm) ? '' : 'none';
+                });
+            });
+            
+            // Add Sample Data if empty
+            if (getCategories().length === 0) {
+                const sampleCategories = [
+                    {
+                        id: 'cat_1',
+                        name: 'مسالا',
+                        icon: 'pepper-hot',
+                        description: 'مختلف ڪيٽيگري جا مسالا'
+                    },
+                    {
+                        id: 'cat_2',
+                        name: 'مصالحو',
+                        icon: 'seedling',
+                        description: 'بنيادي مصالحا'
+                    },
+                    {
+                        id: 'cat_3',
+                        name: 'مرڪب',
+                        icon: 'mortar-pestle',
+                        description: 'مسالن جا مرڪب'
+                    },
+                    {
+                        id: 'cat_4',
+                        name: 'مصنوعات',
+                        icon: 'wine-bottle',
+                        description: 'تيار ٿيل مصنوعات'
+                    },
+                    {
+                        id: 'cat_5',
+                        name: 'جڙي بوٽي',
+                        icon: 'leaf',
+                        description: 'جڙي بوٽي ۽ جڙا'
+                    }
+                ];
+                
+                saveCategories(sampleCategories);
+                
+                // Add sample products if none exist
+                if (getProducts().length === 0) {
+                    const sampleProducts = [
+                        {
+                            id: 'prod_1',
+                            name: 'لال مرچ پائوڊر',
+                            category: 'cat_1',
+                            price: 120,
+                            stock: 50,
+                            unit: 'گرام'
+                        },
+                        {
+                            id: 'prod_2',
+                            name: 'هڊو مصالحو',
+                            category: 'cat_2',
+                            price: 200,
+                            stock: 30,
+                            unit: 'گرام'
+                        },
+                        {
+                            id: 'prod_3',
+                            name: 'چڪن مرڪب',
+                            category: 'cat_3',
+                            price: 150,
+                            stock: 25,
+                            unit: 'گرام'
+                        }
+                    ];
+                    localStorage.setItem('muradMasalaProducts', JSON.stringify(sampleProducts));
+                }
+            }
+            
+            // Load Categories
+            loadCategories();
+            
+            // Add New Category Button
+            document.getElementById('addCategoryBtn').addEventListener('click', function() {
+                document.getElementById('categoryForm').reset();
+                document.getElementById('categoryForm').removeAttribute('data-category-id');
+                document.getElementById('modalTitle').innerHTML = '<i class="fas fa-tag"></i> نئون ڪيٽيگري شامل ڪريو';
+                document.getElementById('categoryIcon').value = 'pepper-hot';
+                openModal('categoryModal');
+            });
+        });
+        
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        });
+        
+        // Toggle Menu
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+        
+        // Toggle User Menu
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        // Close user dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const userBtn = document.querySelector('.user-btn');
+            const dropdown = document.getElementById('userDropdown');
+            
+            if (!userBtn.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+        
+        // Logout Function
+        function logout() {
+            // Here you would typically clear session data
+            alert('توهان کي لاگ آئوٽ ڪيو ويو آهي');
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+        // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>

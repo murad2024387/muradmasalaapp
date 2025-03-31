@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سکڻ - مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Same header as dashboard -->
+        <button class="menu-toggle" onclick="toggleMenu()" style="background: transparent; border: none; cursor: pointer;">
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="#2C3E50" xmlns="http://www.w3.org/2000/svg">
+    <rect y="6" width="30" height="3" rx="1.5" />
+    <rect y="13" width="30" height="3" rx="1.5" />
+    <rect y="20" width="30" height="3" rx="1.5" />
+  </svg>
+</button>
+        
+        <nav id="mainNav">
+            <!-- Dashboard -->
+            <div class="nav-category">
+                <a href="index.html" class="nav-btn active">
+                    <i class="fas fa-home"></i>
+                    <span>ڊيش بورڊ</span>
+                </a>
+            </div>
+            
+    </header>
+
+    <main>
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-graduation-cap"></i> سکڻ</h2>
+            </div>
+            
+            <div class="learning-container">
+                <div class="learning-categories">
+                    <button class="category-btn active" data-category="all">سڀ</button>
+                    <button class="category-btn" data-category="getting-started">شروعات</button>
+                    <button class="category-btn" data-category="sales">وڪري</button>
+                    <button class="category-btn" data-category="inventory">انوينٽري</button>
+                    <button class="category-btn" data-category="reports">رپورٽون</button>
+                </div>
+                
+                <div class="search-box learning-search">
+                    <input type="text" placeholder="سکڻ لاءِ ڳوليو...">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="learning-resources">
+                    <div class="resource-card" data-category="getting-started">
+                        <div class="resource-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3>مراد مسالا ايپ سان شروعات</h3>
+                            <p>هن گائيڊ ۾ توهان ايپ جي بنيادي سيٽ اپ ۽ استعمال کي سکي سگهو ٿا</p>
+                            <div class="resource-meta">
+                                <span class="badge info">شروعات</span>
+                                <span class="duration"><i class="fas fa-clock"></i> 5 منٽ</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline">ڏسو</button>
+                    </div>
+                    
+                    <div class="resource-card" data-category="sales">
+                        <div class="resource-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3>POS استعمال ڪرڻ جو طريقو</h3>
+                            <p>وڪري واري نظام کي ڪيئن استعمال ڪجي ان جي مڪمل وضاحت</p>
+                            <div class="resource-meta">
+                                <span class="badge primary">وڪري</span>
+                                <span class="duration"><i class="fas fa-clock"></i> 8 منٽ</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline">ڏسو</button>
+                    </div>
+                    
+                    <div class="resource-card" data-category="inventory">
+                        <div class="resource-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3>انوينٽري مينجمينٽ</h3>
+                            <p>پراڊڪٽ شامل ڪرڻ، اسٽاڪ مينج ڪرڻ ۽ وڌيڪ</p>
+                            <div class="resource-meta">
+                                <span class="badge warning">انوينٽري</span>
+                                <span class="duration"><i class="fas fa-clock"></i> 10 منٽ</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline">ڏسو</button>
+                    </div>
+                    
+                    <div class="resource-card" data-category="reports">
+                        <div class="resource-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3>رپورٽون سمجهڻ</h3>
+                            <p>رپورٽ کي ڪيئن پڙهجي ۽ تجزيو ڪجي ان جي مڪمل رهنمائي</p>
+                            <div class="resource-meta">
+                                <span class="badge success">رپورٽون</span>
+                                <span class="duration"><i class="fas fa-clock"></i> 7 منٽ</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline">ڏسو</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Learning category filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const resources = document.querySelectorAll('.resource-card');
+                
+                resources.forEach(resource => {
+                    if (category === 'all' || resource.getAttribute('data-category') === category) {
+                        resource.style.display = 'flex';
+                    } else {
+                        resource.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        document.querySelector('.learning-search input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const resources = document.querySelectorAll('.resource-card');
+            
+            resources.forEach(resource => {
+                const title = resource.querySelector('h3').textContent.toLowerCase();
+                const desc = resource.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    resource.style.display = 'flex';
+                } else {
+                    resource.style.display = 'none';
+                }
+            });
+        });
+        // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>

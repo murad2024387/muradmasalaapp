@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وڪري جي رپورٽ - مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <header>
+        <!-- Same header as dashboard -->
+    </header>
+
+    <main>
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> وڪري جي رپورٽ</h2>
+                <div class="header-actions">
+                    <div class="date-range-picker">
+                        <input type="text" id="report-date-range" placeholder="تاريخ چونڊيو" readonly>
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-file-export"></i> برآمد ڪريو
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Row -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-rupee-sign"></i></div>
+                    <h3>ڪل وڪري</h3>
+                    <p>₹24,850.00</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 18%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>آرڊرز</h3>
+                    <p>124</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 12%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>نئون گراھڪ</h3>
+                    <p>28</p>
+                    <div class="stat-trend neutral">
+                        <i class="fas fa-equals"></i> 5%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-percentage"></i></div>
+                    <h3>وڃائڻ وارو</h3>
+                    <p>72%</p>
+                    <div class="stat-trend down">
+                        <i class="fas fa-arrow-down"></i> 3%
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content Grid -->
+            <div class="dashboard-grid">
+                <!-- Sales Chart -->
+                <div class="grid-card chart-card wide">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> وڪري جو ماهوار گراف</h3>
+                        <select class="chart-period">
+                            <option>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="monthlySalesChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Top Products -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> وڃائڻ ۾ مٿا</h3>
+                        <a href="#" class="view-all">سڀ ڏسو</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>پراڊڪٽ</th>
+                                    <th>وڪريون</th>
+                                    <th>رقم</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>مرچ پاؤڊر</td>
+                                    <td>42</td>
+                                    <td>₹6,720.00</td>
+                                </tr>
+                                <tr>
+                                    <td>ڪاري مرچ</td>
+                                    <td>35</td>
+                                    <td>₹6,300.00</td>
+                                </tr>
+                                <tr>
+                                    <td>هڊي پاؤڊر</td>
+                                    <td>28</td>
+                                    <td>₹5,040.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Sales by Category -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tags"></i> قسمن جي مطابق وڪري</h3>
+                    </div>
+                    <div class="chart-container pie">
+                        <canvas id="salesByCategoryChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> تازي وڪريون</h3>
+                        <a href="sales.html" class="view-all">سڀ ڏسو</a>
+                    </div>
+                    <div class="activities-list">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>وڪري #SL-1025 - علي احمد</p>
+                                <small>₹1,450.00 - 28/03/2023</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>وڪري #SL-1024 - فاطمه بيگم</p>
+                                <small>₹920.00 - 27/03/2023</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize Date Range Picker
+        flatpickr("#report-date-range", {
+            mode: "range",
+            dateFormat: "d/m/Y",
+            defaultDate: ["1/3/2023", "31/3/2023"]
+        });
+
+        // Monthly Sales Chart
+        const monthlyCtx = document.getElementById('monthlySalesChart').getContext('2d');
+        const monthlySalesChart = new Chart(monthlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['جنوري', 'فيبروري', 'مارچ', 'اپريل', 'مئي', 'جون'],
+                datasets: [{
+                    label: 'وڪري (₹)',
+                    data: [12000, 18000, 24850, 0, 0, 0],
+                    backgroundColor: 'rgba(0, 123, 255, 0.7)',
+                    borderColor: '#007BFF',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Sales by Category Chart
+        const categoryCtx = document.getElementById('salesByCategoryChart').getContext('2d');
+        const salesByCategoryChart = new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['مرچون', 'مسالا', 'مصنوعات', 'ٻيا'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html><tag>
+  <!--Tab to edit-->
+</tag>

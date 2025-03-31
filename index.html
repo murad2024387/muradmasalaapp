@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراد مسالا ايپ - ڊيش بورڊ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-pepper-hot"></i>
+            <span>مراد مسالا</span>
+        </div>
+        
+    <button class="menu-toggle" onclick="toggleMenu()" style="background: transparent; border: none; cursor: pointer;">
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="#2C3E50" xmlns="http://www.w3.org/2000/svg">
+    <rect y="6" width="30" height="3" rx="1.5" />
+    <rect y="13" width="30" height="3" rx="1.5" />
+    <rect y="20" width="30" height="3" rx="1.5" />
+  </svg>
+</button>
+        
+        <nav id="mainNav">
+            <!-- Dashboard -->
+            <div class="nav-category">
+                <a href="index.html" class="nav-btn active">
+                    <i class="fas fa-home"></i>
+                    <span>ڊيش بورڊ</span>
+                </a>
+            </div>
+            
+            <!-- Inventory -->
+            <div class="nav-category">
+                <button class="nav-btn nav-category-btn">
+                    <i class="fas fa-boxes"></i>
+                    <span>انوينٽري</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="nav-submenu">
+                    <a href="products.html" class="nav-sub-btn">
+                        <i class="fas fa-box-open"></i>
+                        <span>پراڊڪٽس</span>
+                    </a>
+                    <a href="categories.html" class="nav-sub-btn">
+                        <i class="fas fa-tags"></i>
+                        <span>قسمون</span>
+                    </a>
+                    <a href="stock.html" class="nav-sub-btn">
+                        <i class="fas fa-warehouse"></i>
+                        <span>اسٽاڪ</span>
+                    </a>
+                    <a href="suppliers.html" class="nav-sub-btn">
+                        <i class="fas fa-truck"></i>
+                        <span>سپلائرز</span>
+                    </a>
+                </div>
+            </div>
+            
+<!-- Sales -->
+<div class="nav-category">
+  <button class="nav-btn nav-category-btn">
+    <i class="fas fa-rupee-sign"></i>
+    <span>وڪري</span>
+    <i class="fas fa-chevron-down"></i>
+  </button>
+  <div class="nav-submenu">
+    <a href="sales.html" class="nav-sub-btn">
+      <i class="fas fa-cash-register"></i>
+      <span>وڪريون</span>
+    </a>
+    <a href="pos.html" class="nav-sub-btn">
+      <i class="fas fa-desktop"></i>
+      <span>POS</span>
+    </a>
+    <a href="invoices.html" class="nav-sub-btn">
+      <i class="fas fa-file-invoice"></i>
+      <span>بل</span>
+    </a>
+    <a href="orders.html" class="nav-sub-btn">
+      <i class="fas fa-clipboard-check"></i>
+      <span>آرڊرز</span>
+    </a>
+  </div>
+</div>
+            
+            <!-- Customers -->
+            <div class="nav-category">
+                <button class="nav-btn nav-category-btn">
+                    <i class="fas fa-users"></i>
+                    <span>گراھڪ</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="nav-submenu">
+                    <a href="customers.html" class="nav-sub-btn">
+                        <i class="fas fa-user-friends"></i>
+                        <span>گراھڪ</span>
+                    </a>
+                    <a href="customer-groups.html" class="nav-sub-btn">
+                        <i class="fas fa-object-group"></i>
+                        <span>گروپس</span>
+                    </a>
+                    <a href="loyalty.html" class="nav-sub-btn">
+                        <i class="fas fa-award"></i>
+                        <span>لايالٽي</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Reports -->
+            <div class="nav-category">
+                <button class="nav-btn nav-category-btn">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>رپورٽس</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="nav-submenu">
+                    <a href="sales-reports.html" class="nav-sub-btn">
+                        <i class="fas fa-chart-line"></i>
+                        <span>وڪري جي رپورٽ</span>
+                    </a>
+                    <a href="inventory-reports.html" class="nav-sub-btn">
+                        <i class="fas fa-boxes"></i>
+                        <span>انوينٽري رپورٽ</span>
+                    </a>
+                    <a href="profit-reports.html" class="nav-sub-btn">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>منافعو رپورٽ</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+       <div class="user-menu">
+  <div class="notification-icon" onclick="toggleNotifications()">
+    <button class="user-btn">
+      <i class="fas fa-bell"></i>
+      <span class="notification-badge">3</span>
+    </button>
+    <div class="notification-dropdown">
+      <div class="notification-header">
+        <h4>نوٽيفيڪيشن</h4>
+        <span class="mark-read">سڀ پڙهيو</span>
+      </div>
+      <div class="notification-list">
+        <a href="#" class="notification-item unread">
+          <div class="notification-icon">
+            <i class="fas fa-exclamation-circle"></i>
+          </div>
+          <div class="notification-content">
+            <p>نئون آرڊر موصول ٿيو</p>
+            <small>2 منٽ اڳ</small>
+          </div>
+        </a>
+        <a href="#" class="notification-item">
+          <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="notification-content">
+            <p>اسٽاڪ گهٽ آهي: مرچ پاؤڊر</p>
+            <small>1 ڪلاڪ اڳ</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <button class="user-btn" onclick="toggleUserMenu()">
+    <i class="fas fa-user-circle"></i>
+  </button>
+  <div class="user-dropdown" id="userDropdown">
+    <a href="profile.html"><i class="fas fa-user"></i> پروفائل</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> سيٽنگز</a>
+    <a href="learning.html"><i class="fas fa-graduation-cap"></i> سکڻ</a>
+    <div class="dropdown-divider"></div>
+  <a href="#" onclick="confirmLogout(); return false;"><i class="fas fa-sign-out-alt"></i> لاگ آؤٽ</a>
+
+<script>
+  function confirmLogout() {
+    if (confirm("ڇا توهان پڪ آهيو ته لاگ آؤٽ ڪرڻ چاهيو ٿا؟")) {
+      logout();
+    }
+  }
+  
+  function logout() {
+    // Show loading indicator
+    document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;"><i class="fas fa-spinner fa-spin fa-3x"></i><p>لاگ آؤٽ ٿي رهيو آهي...</p></div>';
+    
+    // Clear data after a small delay for better UX
+    setTimeout(function() {
+      // Clear authentication data
+      localStorage.removeItem('murradMasala_loggedIn');
+      localStorage.removeItem('murradMasala_user');
+      
+      // Optionally clear other app data
+      // Object.keys(localStorage).forEach(key => {
+      //     if (key.startsWith('murradMasala_')) {
+      //         localStorage.removeItem(key);
+      //     }
+      // });
+      
+      // Redirect to login page
+      window.location.replace('login.html');
+      
+      // Prevent back navigation
+      window.history.pushState(null, null, 'login.html');
+      window.addEventListener('popstate', function() {
+        window.history.pushState(null, null, 'login.html');
+      });
+    }, 500);
+  }
+</script> </div>
+</div>
+    </header>
+
+    <main>
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-home"></i> ڊيش بورڊ</h2>
+                <div class="header-actions">
+                    <div class="date-selector">
+                        <button class="btn btn-outline"><i class="fas fa-calendar-alt"></i> اڄ</button>
+                        <button class="btn btn-outline active"><i class="fas fa-calendar-week"></i> ھفتو</button>
+                        <button class="btn btn-outline"><i class="fas fa-calendar"></i> مھينو</button>
+                    </div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> نئون آرڊر
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Row -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-rupee-sign"></i></div>
+                    <h3>اڄ جي وڪري</h3>
+                    <p>₹2,450.00</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 12%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-box-open"></i></div>
+                    <h3>موجوده اسٽاڪ</h3>
+                    <p>48 آئيٽم</p>
+                    <div class="stat-trend down">
+                        <i class="fas fa-arrow-down"></i> 5%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>اڄ جا آرڊر</h3>
+                    <p>12</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 8%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>نئون گراھڪ</h3>
+                    <p>3</p>
+                    <div class="stat-trend neutral">
+                        <i class="fas fa-equals"></i> 0%
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content Grid -->
+            <div class="dashboard-grid">
+                <!-- Sales Chart -->
+                <div class="grid-card chart-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> وڪري جو گراف (ھفتو)</h3>
+                        <select class="chart-period">
+                            <option>ھفتو</option>
+                            <option>مھينو</option>
+                            <option>سال</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Recent Activities -->
+                <div class="grid-card activities-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> تازي سرگرميون</h3>
+                        <a href="#" class="view-all">سڀ ڏسو</a>
+                    </div>
+                    <div class="activities-list">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>وڪري: مرچ پاؤڊر - 2 ڪلو</p>
+                                <small>24/03/2023 - ₹320.00</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>اسٽاڪ شامل: هڊي پاؤڊر - 5 ڪلو</p>
+                                <small>23/03/2023 - ₹1,250.00</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon primary">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>نئون گراھڪ شامل ٿيو</p>
+                                <small>22/03/2023 - علي احمد</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Low Stock Items -->
+                <div class="grid-card stock-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> گهٽ اسٽاڪ</h3>
+                        <a href="stock.html" class="view-all">سڀ ڏسو</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>پراڊڪٽ</th>
+                                    <th>اسٽاڪ</th>
+                                    <th>عمل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ڪاري مرچ</td>
+                                    <td class="text-danger">2 ڪلو</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">آرڊر ڪريو</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>هڊي پاؤڊر</td>
+                                    <td class="text-warning">5 ڪلو</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">آرڊر ڪريو</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Top Selling Products -->
+                <div class="grid-card products-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> وڃائڻ ۾ مٿا</h3>
+                        <a href="products.html" class="view-all">سڀ ڏسو</a>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item">
+                            <div class="product-rank">1</div>
+                            <div class="product-info">
+                                <h4>مرچ پاؤڊر</h4>
+                                <p>12 وڪريون - ₹1,920.00</p>
+                            </div>
+                            <div class="product-trend up">
+                                <i class="fas fa-arrow-up"></i> 15%
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-rank">2</div>
+                            <div class="product-info">
+                                <h4>ڪاري مرچ</h4>
+                                <p>8 وڪريون - ₹1,440.00</p>
+                            </div>
+                            <div class="product-trend up">
+                                <i class="fas fa-arrow-up"></i> 8%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize Chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['سومر', 'اڱارو', 'اربع', 'خميس', 'جمعو', 'ڇنڇر', 'آچر'],
+                datasets: [{
+                    label: 'وڪري (₹)',
+                    data: [1200, 1900, 1500, 2000, 1800, 2450, 2100],
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderColor: '#007BFF',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Set active nav item
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNavItem();
+            
+            // Handle category dropdowns
+            const categoryButtons = document.querySelectorAll('.nav-category-btn');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.parentElement;
+                    category.classList.toggle('active');
+                    
+                    // Close other open categories
+                    categoryButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.parentElement.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-category')) {
+                    categoryButtons.forEach(button => {
+                        button.parentElement.classList.remove('active');
+                    });
+                }
+                
+                if (!e.target.closest('.notification-icon')) {
+                    document.querySelector('.notification-dropdown').classList.remove('show');
+                }
+            });
+        });
+        
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('show');
+        }
+        
+        function toggleUserMenu() {
+            document.getElementById('userDropdown').classList.toggle('show');
+        }
+        
+        function toggleNotifications() {
+            document.querySelector('.notification-dropdown').classList.toggle('show');
+        }
+        
+        function setActiveNavItem() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            
+            // Reset all active states
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-sub-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Set active state for current page
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('href') === currentPage) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Also highlight parent category if subpage is active
+            document.querySelectorAll('.nav-sub-btn').forEach(btn => {
+                if (btn.getAttribute('href') === currentPage) {
+                    btn.classList.add('active');
+                    btn.closest('.nav-category').classList.add('active');
+                }
+            });
+        }
+        // لاگ آؤٹ کا بٹن (ہیڈر میں شامل کریں)
+function setupLogoutButton() {
+  const logoutBtn = document.createElement('button');
+  logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> لاگ آؤٹ';
+  logoutBtn.style.position = 'fixed';
+  logoutBtn.style.top = '10px';
+  logoutBtn.style.right = '10px';
+  logoutBtn.style.padding = '8px 15px';
+  logoutBtn.style.background = '#e74c3c';
+  logoutBtn.style.color = 'white';
+  logoutBtn.style.border = 'none';
+  logoutBtn.style.borderRadius = '4px';
+  logoutBtn.style.cursor = 'pointer';
+  
+  logoutBtn.onclick = function() {
+    // تمام ڈیٹا صاف کریں
+    localStorage.clear();
+    
+    // لاگ ان پیج پر redirect کریں
+    window.location.href = 'login.html';
+  };
+  
+  document.body.appendChild(logoutBtn);
+}
+
+// صفحہ لوڈ ہونے پر چیک کریں کہ صارف لاگ ان ہے یا نہیں
+document.addEventListener('DOMContentLoaded', function() {
+  if (!localStorage.getItem('murradMasala_loggedIn')) {
+    window.location.href = 'login.html';
+  } else {
+    setupLogoutButton();
+  }
+});
+
+    </script>
+    
+</body>
+</html>

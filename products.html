@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراد مسالا - پراڊڪٽس</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-pepper-hot"></i>
+            <span>مراد مسالا</span>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMenu()" style="background: transparent; border: none; cursor: pointer;">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="#2C3E50" xmlns="http://www.w3.org/2000/svg">
+                <rect y="6" width="30" height="3" rx="1.5" />
+                <rect y="13" width="30" height="3" rx="1.5" />
+                <rect y="20" width="30" height="3" rx="1.5" />
+            </svg>
+        </button>
+        
+        <nav id="mainNav">
+            <div class="nav-category">
+                <a href="index.html" class="nav-btn active">
+                    <i class="fas fa-home"></i>
+                    <span>ڊش بورڊ</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="products-section">
+            <div class="section-header">
+                <h2><i class="fas fa-boxes"></i> پراڊڪٽ مينجمنٽ</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" id="addProductBtn">
+                        <i class="fas fa-plus"></i> نئون پراڊڪٽ
+                    </button>
+                    <button class="btn btn-success" id="exportBtn">
+                        <i class="fas fa-file-export"></i> برآمد
+                    </button>
+                </div>
+            </div>
+            
+            <div class="products-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="productSearch" placeholder="پراڊڪٽ ڳوليو...">
+                </div>
+                <div class="filters">
+                    <select id="categoryFilter">
+                        <option value="">سڀ قسمون</option>
+                        <option value="masala">مسالا</option>
+                        <option value="spice">مصالحو</option>
+                        <option value="blend">مرڪب</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">سڀ اسٽيٽس</option>
+                        <option value="in_stock">اسٽاڪ ۾</option>
+                        <option value="low_stock">گهٽ اسٽاڪ</option>
+                        <option value="out_of_stock">ختم ٿي ويو</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table id="productsTable">
+                    <thead>
+                        <tr>
+                            <th>آئي ڊي</th>
+                            <th>تصوير</th>
+                            <th>نالو</th>
+                            <th>قسم</th>
+                            <th>قيمت</th>
+                            <th>اسٽاڪ</th>
+                            <th>اسٽيٽس</th>
+                            <th>عمل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Products will be loaded here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <button class="btn btn-outline" id="prevPage"><i class="fas fa-chevron-right"></i> پويون</button>
+                <span class="page-info">صفحو 1 جو 5</span>
+                <button class="btn btn-outline" id="nextPage">اڳيون <i class="fas fa-chevron-left"></i></button>
+            </div>
+        </section>
+        
+        <!-- Product Modal -->
+        <div class="modal" id="productModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modalTitle"><i class="fas fa-box"></i> نئون پراڊڪٽ شامل ڪريو</h3>
+                
+                <form id="productForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">پراڊڪٽ جو نالو*</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productCode">پراڊڪٽ ڪوڊ*</label>
+                            <input type="text" id="productCode" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory">قسم*</label>
+                            <select id="productCategory" required>
+                                <option value="">-- انتخاب ڪريو --</option>
+                                <option value="masala">مسالا</option>
+                                <option value="spice">مصالحو</option>
+                                <option value="blend">مرڪب</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productUnit">يونٽ*</label>
+                            <select id="productUnit" required>
+                                <option value="kg">ڪلوگرام</option>
+                                <option value="g">گرام</option>
+                                <option value="packet">پيڪٽ</option>
+                                <option value="piece">ٽڪرو</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice">قيمت (₹)*</label>
+                            <input type="number" id="productPrice" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productCost">قيمت (لاڳت)*</label>
+                            <input type="number" id="productCost" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productStock">اسٽاڪ*</label>
+                            <input type="number" id="productStock" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productAlert">الارم سطح</label>
+                            <input type="number" id="productAlert" placeholder="Default: 5">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productImage">تصوير شامل ڪريو</label>
+                        <input type="file" id="productImage" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDesc">وضاحت</label>
+                        <textarea id="productDesc" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> محفوظ ڪريو
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">
+                            <i class="fas fa-times"></i> منسوخ ڪريو
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Delete Confirmation Modal -->
+        <div class="modal" id="deleteModal">
+            <div class="modal-content small">
+                <h3><i class="fas fa-exclamation-triangle"></i> پراڊڪٽ ڊليٽ ڪريو</h3>
+                <p>ڇا توهان پڪ آهيو ته توهان هن پراڊڪٽ کي ڊليٽ ڪرڻ چاهيو ٿا؟ <strong id="deleteProductName"></strong></p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="confirmDelete">هاڻ، ڊليٽ ڪريو</button>
+                    <button class="btn btn-outline" onclick="closeModal()">منسوخ ڪريو</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // پراڊڪٽس مينجمنٽ سسٽم
+        document.addEventListener('DOMContentLoaded', function() {
+            // لوڪل اسٽوريج فنڪشنز
+            function getProducts() {
+                const products = localStorage.getItem('muradMasalaProducts');
+                return products ? JSON.parse(products) : [];
+            }
+            
+            function saveProducts(products) {
+                localStorage.setItem('muradMasalaProducts', JSON.stringify(products));
+            }
+            
+            // پراڊڪٽس لوڊ ڪريو
+            function loadProducts() {
+                const products = getProducts();
+                const tbody = document.querySelector('#productsTable tbody');
+                tbody.innerHTML = '';
+                
+                if (products.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">ڪوبه پراڊڪٽ دستياب ناهي</td></tr>';
+                    return;
+                }
+                
+                products.forEach(product => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${product.id}</td>
+                        <td><img src="${product.image || 'images/default-product.png'}" alt="${product.name}" class="product-img"></td>
+                        <td>${product.name}</td>
+                        <td>${getCategoryName(product.category)}</td>
+                        <td>₹${product.price.toFixed(2)}</td>
+                        <td>${product.stock} ${getUnitName(product.unit)}</td>
+                        <td><span class="status-badge ${getStockStatusClass(product.stock, product.alertLevel)}">${getStockStatus(product.stock, product.alertLevel)}</span></td>
+                        <td>
+                            <button class="btn-action btn-edit" onclick="editProduct(${product.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn-action btn-delete" onclick="showDeleteModal(${product.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+            
+            // هيلپر فنڪشنز
+            function getCategoryName(category) {
+                const categories = {
+                    'masala': 'مسالا',
+                    'spice': 'مصالحو',
+                    'blend': 'مرڪب'
+                };
+                return categories[category] || category;
+            }
+            
+            function getUnitName(unit) {
+                const units = {
+                    'kg': 'ڪلو',
+                    'g': 'گرام',
+                    'packet': 'پيڪٽ',
+                    'piece': 'ٽڪرو'
+                };
+                return units[unit] || unit;
+            }
+            
+            function getStockStatus(stock, alertLevel = 5) {
+                if (stock <= 0) return 'ختم ٿي ويو';
+                if (stock <= alertLevel) return 'گهٽ اسٽاڪ';
+                return 'اسٽاڪ ۾';
+            }
+            
+            function getStockStatusClass(stock, alertLevel = 5) {
+                if (stock <= 0) return 'status-danger';
+                if (stock <= alertLevel) return 'status-warning';
+                return 'status-success';
+            }
+            
+            // پراڊڪٽ شامل/اپڊيٽ ڪرڻ جو فنڪشن
+            window.addOrUpdateProduct = function(productData, isEdit = false) {
+                const products = getProducts();
+                
+                if (isEdit) {
+                    const index = products.findIndex(p => p.id === productData.id);
+                    if (index !== -1) {
+                        products[index] = productData;
+                    }
+                } else {
+                    productData.id = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+                    products.push(productData);
+                }
+                
+                saveProducts(products);
+                loadProducts();
+                closeModal();
+            };
+            
+            // پراڊڪٽ ايڊٽ ڪرڻ جو فنڪشن
+            window.editProduct = function(productId) {
+                const products = getProducts();
+                const product = products.find(p => p.id === productId);
+                
+                if (product) {
+                    document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> پراڊڪٽ اپڊيٽ ڪريو';
+                    document.getElementById('productName').value = product.name;
+                    document.getElementById('productCode').value = product.code || '';
+                    document.getElementById('productCategory').value = product.category;
+                    document.getElementById('productUnit').value = product.unit;
+                    document.getElementById('productPrice').value = product.price;
+                    document.getElementById('productCost').value = product.cost || '';
+                    document.getElementById('productStock').value = product.stock;
+                    document.getElementById('productAlert').value = product.alertLevel || 5;
+                    document.getElementById('productDesc').value = product.description || '';
+                    
+                    document.getElementById('productForm').dataset.productId = product.id;
+                    openModal('productModal');
+                }
+            };
+            
+            // پراڊڪٽ ڊليٽ ڪرڻ جو فنڪشن
+            window.deleteProduct = function(productId) {
+                const products = getProducts().filter(p => p.id !== productId);
+                saveProducts(products);
+                loadProducts();
+                closeModal();
+            };
+            
+            // ڊليٽ موڊل ڏيکاريو
+            window.showDeleteModal = function(productId) {
+                const products = getProducts();
+                const product = products.find(p => p.id === productId);
+                
+                if (product) {
+                    document.getElementById('deleteProductName').textContent = product.name;
+                    document.getElementById('confirmDelete').onclick = function() {
+                        deleteProduct(productId);
+                    };
+                    openModal('deleteModal');
+                }
+            };
+            
+            // فارم سبمشن هينڊلر
+            document.getElementById('productForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const productId = this.dataset.productId ? parseInt(this.dataset.productId) : null;
+                const isEdit = !!productId;
+                
+                const productData = {
+                    id: productId,
+                    name: document.getElementById('productName').value,
+                    code: document.getElementById('productCode').value,
+                    category: document.getElementById('productCategory').value,
+                    unit: document.getElementById('productUnit').value,
+                    price: parseFloat(document.getElementById('productPrice').value),
+                    cost: parseFloat(document.getElementById('productCost').value) || 0,
+                    stock: parseInt(document.getElementById('productStock').value),
+                    alertLevel: parseInt(document.getElementById('productAlert').value) || 5,
+                    description: document.getElementById('productDesc').value,
+                    image: 'images/default-product.png'
+                };
+                
+                addOrUpdateProduct(productData, isEdit);
+            });
+            
+            // سرچ ۽ فلٽرنگ
+            document.getElementById('productSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#productsTable tbody tr');
+                
+                rows.forEach(row => {
+                    const name = row.cells[2].textContent.toLowerCase();
+                    row.style.display = name.includes(searchTerm) ? '' : 'none';
+                });
+            });
+            
+            document.getElementById('categoryFilter').addEventListener('change', function() {
+                const category = this.value;
+                const rows = document.querySelectorAll('#productsTable tbody tr');
+                
+                rows.forEach(row => {
+                    if (!category) {
+                        row.style.display = '';
+                        return;
+                    }
+                    
+                    const rowCategory = row.cells[3].textContent.toLowerCase();
+                    row.style.display = rowCategory.includes(category) ? '' : 'none';
+                });
+            });
+            
+            document.getElementById('statusFilter').addEventListener('change', function() {
+                const status = this.value;
+                const rows = document.querySelectorAll('#productsTable tbody tr');
+                
+                rows.forEach(row => {
+                    if (!status) {
+                        row.style.display = '';
+                        return;
+                    }
+                    
+                    const statusClass = row.cells[6].querySelector('.status-badge').className;
+                    let showRow = false;
+                    
+                    if (status === 'in_stock' && statusClass.includes('status-success')) showRow = true;
+                    if (status === 'low_stock' && statusClass.includes('status-warning')) showRow = true;
+                    if (status === 'out_of_stock' && statusClass.includes('status-danger')) showRow = true;
+                    
+                    row.style.display = showRow ? '' : 'none';
+                });
+            });
+            
+            // نموني ڊيٽا شامل ڪريو جيڪڏهن خالي آهي
+            if (getProducts().length === 0) {
+                const sampleProducts = [
+                    {
+                        id: 1,
+                        name: 'لال مرچ پائوڊر',
+                        code: 'MAS001',
+                        category: 'masala',
+                        unit: 'g',
+                        price: 50,
+                        cost: 30,
+                        stock: 100,
+                        alertLevel: 20,
+                        description: 'تازه لال مرچ جو پائوڊر',
+                        image: 'images/chilli-powder.png'
+                    },
+                    {
+                        id: 2,
+                        name: 'هڙدي پائوڊر',
+                        code: 'MAS002',
+                        category: 'masala',
+                        unit: 'g',
+                        price: 40,
+                        cost: 25,
+                        stock: 5,
+                        alertLevel: 10,
+                        description: 'خالص هڙدي پائوڊر',
+                        image: 'images/turmeric.png'
+                    }
+                ];
+                
+                saveProducts(sampleProducts);
+            }
+            
+            // پراڊڪٽس لوڊ ڪريو
+            loadProducts();
+        });
+        
+        // موڊل فنڪشنز
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.getElementById('productForm').reset();
+            document.getElementById('productForm').removeAttribute('data-product-id');
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-box"></i> نئون پراڊڪٽ شامل ڪريو';
+        }
+        
+        // نئون پراڊڪٽ بٽن
+        document.getElementById('addProductBtn').addEventListener('click', function() {
+            openModal('productModal');
+        });
+        
+        // برآمد بٽن
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            const products = getProducts();
+            const dataStr = JSON.stringify(products, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'murad-masala-products.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        });
+        
+        // گلوبل فنڪشنز
+        window.getProducts = getProducts;
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لاگ ان | مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: white;
+            width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            display: none;
+            padding: 10px;
+            background: #fde8e8;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <i class="fas fa-store"></i>
+        </div>
+        <h1>مراد مسالا ۾ لاگ ان</h1>
+        
+        <div class="form-group">
+            <label for="username">يوزر نالو</label>
+            <input type="text" id="username" placeholder="يوزر نالو داخل ڪريو">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">پاسورڊ</label>
+            <input type="password" id="password" placeholder="پاسورڊ داخل ڪريو">
+        </div>
+        
+        <div id="errorMsg" class="error">
+            <i class="fas fa-exclamation-circle"></i> غلط يوزر نالو يا پاسورڊ
+        </div>
+        
+        <button class="btn" onclick="login()">
+            <i class="fas fa-sign-in-alt"></i> لاگ ان
+        </button>
+    </div>
+
+    <script>
+        // صرف اجازت يافتہ صارفين
+        const validUsers = [
+            { username: "a", password: "a", name: "منيجر" },
+            { username: "staff", password: "staff123", name: "اسٽاف" }
+        ];
+
+        // لاگ ان فنکشن
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            
+            // صاف کریں پرانی غلطیاں
+            errorMsg.style.display = 'none';
+            
+            // خالی فیلڈز چیک کریں
+            if (!username || !password) {
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> مهرباني ڪري سڀ فیلڀ ڀريو';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // چیک کریں صارف کا وجود
+            const user = validUsers.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                // لاگ ان کامیاب
+                localStorage.setItem('murradMasala_loggedIn', 'true');
+                localStorage.setItem('murradMasala_user', JSON.stringify(user));
+                
+                // ایپلیکیشن کھولیں
+                window.location.href = 'index.html';
+            } else {
+                // لاگ ان ناکام
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> غلط يوزر نالو يا پاسورڊ';
+                errorMsg.style.display = 'block';
+                
+                // غلط کوشش پر فیلڈز خالی کریں
+                document.getElementById('password').value = '';
+            }
+        }
+
+        // اگر پہلے سے لاگ ان ہے تو ایپلیکیشن پر redirect کریں
+        if (localStorage.getItem('murradMasala_loggedIn')) {
+            window.location.href = 'index.html';
+        }
+
+        // انٹر کی دبائی چیک کریں
+        document.getElementById('password').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                login();
+            }
+        });
+        // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وپار جو پروفائيل | مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 900px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .form-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        .form-section h3 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        .logo-preview {
+            max-width: 150px;
+            max-height: 150px;
+            display: block;
+            margin: 10px 0;
+            border: 1px dashed #ccc;
+            padding: 5px;
+        }
+        .file-upload {
+            margin: 15px 0;
+        }
+        .branch-item, .hour-item {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #3498db;
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .social-icons input {
+            flex-grow: 1;
+        }
+        .social-icons i {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: right;
+        }
+    </style>
+</head>
+<script>
+  // چیک کریں کہ صارف لاگ ان ہے یا نہیں
+  if (!localStorage.getItem('murradMasala_loggedIn')) {
+    window.location.href = 'login.html';
+  }
+</script>
+<body>
+  <div>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            padding-right: 40px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        .company-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        .company-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        .company-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .company-address {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        .company-contacts {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: #3498db;
+        }
+        .contact-item i {
+            margin-left: 5px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+    </style>
+
+    <div class="search-container">
+        <h2><i class="fas fa-search"></i> وپار جو ڳولا</h2>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="وپار جو نالو، پتو، يا فون نمبر لکو..." onkeyup="searchCompanies()">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <div id="searchResults">
+            <!-- Results will appear here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        // Sample company data (in real app, load from localStorage/API)
+        const companies = [
+            {
+                name: "مراد مسالا - مرڪزي شاخ",
+                address: "حيدرآباد، سنڌ، پاڪستان",
+                phone: "0221234567",
+                email: "info@murradmasala.com",
+                branches: 3
+            },
+            {
+                name: "مراد مسالا - ڪراچي شاخ",
+                address: "ڪراچي، پاڪستان",
+                phone: "0217654321",
+                email: "karachi@murradmasala.com",
+                branches: 1
+            },
+            {
+                name: "مراد مسالا - ميرپورخاص شاخ",
+                address: "ميرپورخاص، سنڌ، پاڪستان",
+                phone: "0232123456",
+                email: "mirpurkhas@murradmasala.com",
+                branches: 2
+            }
+        ];
+
+        // Live search function
+        function searchCompanies() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+            
+            if (input.length < 1) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-info-circle" style="font-size: 24px;"></i>
+                        <p>ڳولا شروع ڪرڻ لاءِ مٿي ٽائپ ڪريو</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const filtered = companies.filter(company => 
+                company.name.toLowerCase().includes(input) ||
+                company.address.toLowerCase().includes(input) ||
+                company.phone.includes(input)
+            );
+            
+            if (filtered.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-times-circle" style="font-size: 24px;"></i>
+                        <p>ڪابه نتيجو نه مليو</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filtered.forEach(company => {
+                const card = document.createElement('div');
+                card.className = 'company-card';
+                card.innerHTML = `
+                    <div class="company-name">${company.name}</div>
+                    <div class="company-address">${company.address}</div>
+                    <div class="company-contacts">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            ${company.phone}
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            ${company.email}
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-code-branch"></i>
+                            ${company.branches} شاخون
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(card);
+            });
+        }
+
+        // Initialize with empty state
+        window.onload = function() {
+            document.getElementById('searchResults').innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search" style="font-size: 24px;"></i>
+                    <p>ڳولا شروع ڪرڻ لاءِ مٿي ٽائپ ڪريو</p>
+                </div>
+            `;
+        };
+        // Load from localStorage
+const savedData = localStorage.getItem('companyProfile');
+const companies = savedData ? [JSON.parse(savedData)] : [];
+
+// Or load from your database
+async function loadCompanies() {
+  if (AppConfig.databaseMode === 'local') {
+    return JSON.parse(localStorage.getItem('companies')) || [];
+  } else {
+    const response = await fetch(`${AppConfig.serverDatabase.apiUrl}/companies`);
+    return await response.json();
+  }
+}
+    </script>
+
+  </div>
+    <div class="container">
+        <h2><i class="fas fa-building"></i> وپار جو پروفائيل</h2>
+        <button class="btn btn-outline" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i> ڊيش بورڊ تي واپس
+        </button>
+        <button class="btn btn-danger" onclick="generatePDF()">
+            <i class="fas fa-file-pdf"></i> PDF ٺاهيو
+        </button>
+
+        <form id="companyForm">
+            <!-- Basic Information Section -->
+            <div class="form-section">
+                <h3><i class="fas fa-info-circle"></i> بنيادي معلومات</h3>
+                <div class="form-group">
+                    <label>واپار جو نالو</label>
+                    <input type="text" id="companyName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>لوگو</label>
+                    <div class="file-upload">
+                        <img src="images/default-logo.png" alt="لوگو" class="logo-preview" id="logoPreview">
+                        <input type="file" id="logoUpload" accept="image/*" style="display: none;">
+                        <button type="button" class="btn btn-outline" onclick="document.getElementById('logoUpload').click()">
+                            <i class="fas fa-upload"></i> لوگو چونڊيو
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>واپار جو پتو</label>
+                    <textarea id="companyAddress" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>فون نمبر</label>
+                    <input type="tel" id="companyPhone">
+                </div>
+
+                <div class="form-group">
+                    <label>اي ميل</label>
+                    <input type="email" id="companyEmail">
+                </div>
+
+                <div class="form-group">
+                    <label>ٽيڪس ريٽ (%)</label>
+                    <input type="number" id="taxRate" min="0" max="100" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label>قائم ٿيل تاريخ</label>
+                    <input type="date" id="establishedDate">
+                </div>
+            </div>
+
+            <!-- Branches Section -->
+            <div class="form-section">
+                <h3><i class="fas fa-code-branch"></i> شاخون</h3>
+                <div id="branchesContainer">
+                    <!-- Branches will be added here dynamically -->
+                </div>
+                <button type="button" class="btn btn-outline" onclick="addBranch()">
+                    <i class="fas fa-plus"></i> نئين شاخ شامل ڪريو
+                </button>
+            </div>
+
+            <!-- Business Hours Section -->
+            <div class="form-section">
+                <h3><i class="fas fa-clock"></i> واپار جا وقت</h3>
+                <div id="businessHoursContainer">
+                    <!-- Business hours will be added here dynamically -->
+                </div>
+                <button type="button" class="btn btn-outline" onclick="addBusinessHour()">
+                    <i class="fas fa-plus"></i> وقت شامل ڪريو
+                </button>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="form-section">
+                <h3><i class="fas fa-share-alt"></i> سوشل ميڊيا لنڪس</h3>
+                <div class="form-group">
+                    <label>فيسبوڪ</label>
+                    <div class="social-icons">
+                        <i class="fab fa-facebook"></i>
+                        <input type="url" id="facebookUrl" placeholder="https://facebook.com/yourpage">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>واٽس ايپ</label>
+                    <div class="social-icons">
+                        <i class="fab fa-whatsapp"></i>
+                        <input type="tel" id="whatsappNumber" placeholder="923001234567">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>انسٽاگرام</label>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <input type="url" id="instagramUrl" placeholder="https://instagram.com/yourpage">
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="saveCompany()">
+                <i class="fas fa-save"></i> محفوظ ڪريو
+            </button>
+            <button type="button" class="btn btn-outline" onclick="resetForm()">
+                <i class="fas fa-undo"></i> ري سيٽ
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Initialize JS variables
+        let branches = [];
+        let businessHours = [];
+        
+        // Logo upload preview
+        document.getElementById('logoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('logoPreview').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add new branch
+        function addBranch(branchData = null) {
+            const branchId = Date.now();
+            const branchHtml = `
+                <div class="branch-item" id="branch-${branchId}">
+                    <div class="form-group">
+                        <label>شاخ جو نالو</label>
+                        <input type="text" id="branchName-${branchId}" value="${branchData?.name || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>پتو</label>
+                        <textarea id="branchAddress-${branchId}" required>${branchData?.address || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>منيجر جو نالو</label>
+                        <input type="text" id="branchManager-${branchId}" value="${branchData?.manager || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>فون نمبر</label>
+                        <input type="tel" id="branchPhone-${branchId}" value="${branchData?.phone || ''}">
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="removeBranch(${branchId})">
+                        <i class="fas fa-trash"></i> شاخ حذف ڪريو
+                    </button>
+                </div>
+            `;
+            document.getElementById('branchesContainer').insertAdjacentHTML('beforeend', branchHtml);
+            
+            if (!branchData) {
+                branches.push({
+                    id: branchId,
+                    name: '',
+                    address: '',
+                    manager: '',
+                    phone: ''
+                });
+            }
+        }
+
+        // Remove branch
+        function removeBranch(id) {
+            if (confirm("ڇا توهان پڪ آهيو ته هن شاخ کي حذف ڪرڻ چاهيو ٿا؟")) {
+                document.getElementById(`branch-${id}`).remove();
+                branches = branches.filter(branch => branch.id !== id);
+            }
+        }
+
+        // Add business hour
+        function addBusinessHour(hourData = null) {
+            const hourId = Date.now();
+            const hourHtml = `
+                <div class="hour-item" id="hour-${hourId}">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label>ڏينهن</label>
+                            <select id="hourDay-${hourId}">
+                                <option value="Monday" ${hourData?.day === 'Monday' ? 'selected' : ''}>سومر</option>
+                                <option value="Tuesday" ${hourData?.day === 'Tuesday' ? 'selected' : ''}>اڱارو</option>
+                                <option value="Wednesday" ${hourData?.day === 'Wednesday' ? 'selected' : ''}>اربع</option>
+                                <option value="Thursday" ${hourData?.day === 'Thursday' ? 'selected' : ''}>خميس</option>
+                                <option value="Friday" ${hourData?.day === 'Friday' ? 'selected' : ''}>جمعو</option>
+                                <option value="Saturday" ${hourData?.day === 'Saturday' ? 'selected' : ''}>ڇنڇر</option>
+                                <option value="Sunday" ${hourData?.day === 'Sunday' ? 'selected' : ''}>آچر</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>کليل وقت</label>
+                            <input type="time" id="hourOpen-${hourId}" value="${hourData?.open || '09:00'}">
+                        </div>
+                        <div style="flex: 1;">
+                            <label>بند وقت</label>
+                            <input type="time" id="hourClose-${hourId}" value="${hourData?.close || '18:00'}">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="removeBusinessHour(${hourId})" style="margin-top: 10px;">
+                        <i class="fas fa-trash"></i> وقت حذف ڪريو
+                    </button>
+                </div>
+            `;
+            document.getElementById('businessHoursContainer').insertAdjacentHTML('beforeend', hourHtml);
+            
+            if (!hourData) {
+                businessHours.push({
+                    id: hourId,
+                    day: 'Monday',
+                    open: '09:00',
+                    close: '18:00'
+                });
+            }
+        }
+
+        // Remove business hour
+        function removeBusinessHour(id) {
+            if (confirm("ڇا توهان پڪ آهيو ته هن وقت کي حذف ڪرڻ چاهيو ٿا؟")) {
+                document.getElementById(`hour-${id}`).remove();
+                businessHours = businessHours.filter(hour => hour.id !== id);
+            }
+        }
+
+        // Save company data
+        function saveCompany() {
+            // Basic info
+            const companyData = {
+                name: document.getElementById('companyName').value,
+                address: document.getElementById('companyAddress').value,
+                phone: document.getElementById('companyPhone').value,
+                email: document.getElementById('companyEmail').value,
+                taxRate: document.getElementById('taxRate').value,
+                establishedDate: document.getElementById('establishedDate').value,
+                logo: document.getElementById('logoPreview').src,
+                
+                // Social media
+                facebook: document.getElementById('facebookUrl').value,
+                whatsapp: document.getElementById('whatsappNumber').value,
+                instagram: document.getElementById('instagramUrl').value,
+                
+                // Branches
+                branches: [],
+                
+                // Business hours
+                businessHours: []
+            };
+
+            // Validate required fields
+            if (!companyData.name || !companyData.address) {
+                alert("مهرباني ڪري بنيادي معلومات مڪمل ڪريو!");
+                return;
+            }
+
+            // Save branches
+            document.querySelectorAll('.branch-item').forEach(branchEl => {
+                const id = branchEl.id.split('-')[1];
+                companyData.branches.push({
+                    name: document.getElementById(`branchName-${id}`).value,
+                    address: document.getElementById(`branchAddress-${id}`).value,
+                    manager: document.getElementById(`branchManager-${id}`).value,
+                    phone: document.getElementById(`branchPhone-${id}`).value
+                });
+            });
+
+            // Save business hours
+            document.querySelectorAll('.hour-item').forEach(hourEl => {
+                const id = hourEl.id.split('-')[1];
+                companyData.businessHours.push({
+                    day: document.getElementById(`hourDay-${id}`).value,
+                    open: document.getElementById(`hourOpen-${id}`).value,
+                    close: document.getElementById(`hourClose-${id}`).value
+                });
+            });
+
+            // Save to localStorage (or server)
+            localStorage.setItem('companyProfile', JSON.stringify(companyData));
+            alert('وپار جو پروفائل کامیابي سان محفوظ ٿي ويو!');
+        }
+
+        // Generate PDF
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add logo and title
+            doc.setFontSize(20);
+            doc.setTextColor(40, 40, 40);
+            doc.text('وپار جو پروفائيل', 105, 20, { align: 'center' });
+            
+            // Add basic info table
+            doc.autoTable({
+                startY: 30,
+                head: [['بنيادي معلومات', '']],
+                body: [
+                    ['نام', document.getElementById('companyName').value || 'N/A'],
+                    ['پتو', document.getElementById('companyAddress').value || 'N/A'],
+                    ['فون', document.getElementById('companyPhone').value || 'N/A'],
+                    ['ٽيڪس ريٽ', (document.getElementById('taxRate').value || '0') + '%']
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [52, 152, 219] }
+            });
+            
+            // Add branches table
+            if (document.querySelectorAll('.branch-item').length > 0) {
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['شاخون', 'پتو', 'منيجر', 'فون']],
+                    body: Array.from(document.querySelectorAll('.branch-item')).map(branch => [
+                        branch.querySelector('input[type="text"]').value || 'N/A',
+                        branch.querySelector('textarea').value || 'N/A',
+                        branch.querySelectorAll('input[type="text"]')[1].value || 'N/A',
+                        branch.querySelector('input[type="tel"]').value || 'N/A'
+                    ]),
+                    theme: 'grid',
+                    headStyles: { fillColor: [52, 152, 219] }
+                });
+            }
+            
+            // Add business hours table
+            if (document.querySelectorAll('.hour-item').length > 0) {
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['ڏينهن', 'کليل وقت', 'بند وقت']],
+                    body: Array.from(document.querySelectorAll('.hour-item')).map(hour => [
+                        hour.querySelector('select').options[hour.querySelector('select').selectedIndex].text,
+                        hour.querySelectorAll('input[type="time"]')[0].value || 'N/A',
+                        hour.querySelectorAll('input[type="time"]')[1].value || 'N/A'
+                    ]),
+                    theme: 'grid',
+                    headStyles: { fillColor: [52, 152, 219] }
+                });
+            }
+            
+            // Save the PDF
+            doc.save('مراد_مسالا_پروفائل.pdf');
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('companyForm').reset();
+            document.getElementById('logoPreview').src = 'images/default-logo.png';
+            document.getElementById('branchesContainer').innerHTML = '';
+            document.getElementById('businessHoursContainer').innerHTML = '';
+            branches = [];
+            businessHours = [];
+        }
+
+        // Load saved data on page load
+        window.onload = function() {
+            // Set default established date
+            const currentDate = new Date();
+            document.getElementById('establishedDate').value = currentDate.toISOString().substr(0, 10);
+            
+            // Load from localStorage if available
+            const savedData = localStorage.getItem('companyProfile');
+            if (savedData) {
+                const companyData = JSON.parse(savedData);
+                
+                // Basic info
+                document.getElementById('companyName').value = companyData.name || '';
+                document.getElementById('companyAddress').value = companyData.address || '';
+                document.getElementById('companyPhone').value = companyData.phone || '';
+                document.getElementById('companyEmail').value = companyData.email || '';
+                document.getElementById('taxRate').value = companyData.taxRate || '';
+                document.getElementById('establishedDate').value = companyData.establishedDate || '';
+                if (companyData.logo) document.getElementById('logoPreview').src = companyData.logo;
+                
+                // Social media
+                document.getElementById('facebookUrl').value = companyData.facebook || '';
+                document.getElementById('whatsappNumber').value = companyData.whatsapp || '';
+                document.getElementById('instagramUrl').value = companyData.instagram || '';
+                
+                // Branches
+                if (companyData.branches && companyData.branches.length > 0) {
+                    companyData.branches.forEach(branch => {
+                        addBranch(branch);
+                    });
+                }
+                
+                // Business hours
+                if (companyData.businessHours && companyData.businessHours.length > 0) {
+                    companyData.businessHours.forEach(hour => {
+                        addBusinessHour(hour);
+                    });
+                }
+            }
+            
+            // Add default business hours if none exist
+            if (document.querySelectorAll('.hour-item').length === 0) {
+                addBusinessHour();
+            }
+        };
+    </script>
+    <div>
+      <!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وپار جو پروفائيل | مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            text-align: right;
+        }
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 20px;
+        }
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 30px;
+        }
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .company-info h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 28px;
+        }
+        .company-info p {
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            font-size: 22px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .contact-item i {
+            width: 30px;
+            color: #3498db;
+            font-size: 18px;
+        }
+        .business-hours {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .business-hours th, .business-hours td {
+            padding: 10px;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        .business-hours th {
+            background-color: #f8f9fa;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-print {
+            background: #2c3e50;
+            color: white;
+        }
+        .btn-share {
+            background: #3498db;
+            color: white;
+        }
+        .btn-download {
+            background: #27ae60;
+            color: white;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .profile-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .action-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container" id="profileToPrint">
+        <div class="profile-header">
+            <div class="logo-container">
+                <img src="images/company-logo.png" alt="مراد مسالا لوگو" id="companyLogo">
+            </div>
+            <div class="company-info">
+                <h1 id="companyName">مراد مسالا</h1>
+                <p id="companyAddress">حيدرآباد، سنڌ، پاڪستان</p>
+                <p id="companyEstablished">قائم ٿيل: 2005</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-id-card"></i> رابطا</h2>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span id="companyPhone">0221-1234567</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span id="companyEmail">info@murradmasala.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span id="companyWebsite">www.murradmasala.com</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-clock"></i> واپار جا وقت</h2>
+            <table class="business-hours" id="businessHoursTable">
+                <thead>
+                    <tr>
+                        <th>ڏينهن</th>
+                        <th>کليل وقت</th>
+                        <th>بند وقت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>سومر - جمعو</td>
+                        <td>9:00 صبح</td>
+                        <td>8:00 شام</td>
+                    </tr>
+                    <tr>
+                        <td>ڇنڇر - آچر</td>
+                        <td>10:00 صبح</td>
+                        <td>6:00 شام</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-code-branch"></i> شاخون</h2>
+            <div id="branchesList">
+                <p><strong>مرڪزي شاخ:</strong> حيدرآباد، سنڌ</p>
+                <p><strong>ڪراچي شاخ:</strong> ڪراچي، صدر مارڪيٽ</p>
+                <p><strong>ميرپورخاص شاخ:</strong> ميرپورخاص، ڪشمور روڊ</p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-print" onclick="printProfile()">
+                <i class="fas fa-print"></i> پرنٽ
+            </button>
+            <button class="btn btn-share" onclick="shareProfile()">
+                <i class="fas fa-share-alt"></i> شيئر ڪريو
+            </button>
+            <button class="btn btn-download" onclick="downloadPDF()">
+                <i class="fas fa-file-pdf"></i> ڊائون لوڊ
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Load company data
+        function loadCompanyData() {
+            const savedData = localStorage.getItem('companyProfile');
+            if (savedData) {
+                const company = JSON.parse(savedData);
+                
+                // Basic Info
+                document.getElementById('companyName').textContent = company.name || 'مراد مسالا';
+                document.getElementById('companyAddress').textContent = company.address || 'حيدرآباد، سنڌ، پاڪستان';
+                document.getElementById('companyEstablished').textContent = `قائم ٿيل: ${company.establishedDate || '2005'}`;
+                if (company.logo) document.getElementById('companyLogo').src = company.logo;
+                
+                // Contacts
+                document.getElementById('companyPhone').textContent = company.phone || '0221-1234567';
+                document.getElementById('companyEmail').textContent = company.email || 'info@murradmasala.com';
+                
+                // Business Hours (if available)
+                if (company.businessHours && company.businessHours.length > 0) {
+                    const hoursTable = document.getElementById('businessHoursTable').getElementsByTagName('tbody')[0];
+                    hoursTable.innerHTML = '';
+                    company.businessHours.forEach(hour => {
+                        hoursTable.innerHTML += `
+                            <tr>
+                                <td>${getDayName(hour.day)}</td>
+                                <td>${hour.open}</td>
+                                <td>${hour.close}</td>
+                            </tr>
+                        `;
+                    });
+                }
+                
+                // Branches (if available)
+                if (company.branches && company.branches.length > 0) {
+                    const branchesList = document.getElementById('branchesList');
+                    branchesList.innerHTML = '';
+                    company.branches.forEach(branch => {
+                        branchesList.innerHTML += `
+                            <p><strong>${branch.name || 'شاخ'}:</strong> ${branch.address || ''}</p>
+                        `;
+                    });
+                }
+            }
+        }
+
+        // Helper function to get day name
+        function getDayName(day) {
+            const days = {
+                'Monday': 'سومر',
+                'Tuesday': 'اڱارو',
+                'Wednesday': 'اربع',
+                'Thursday': 'خميس',
+                'Friday': 'جمعو',
+                'Saturday': 'ڇنڇر',
+                'Sunday': 'آچر'
+            };
+            return days[day] || day;
+        }
+
+        // Print function
+        function printProfile() {
+            window.print();
+        }
+
+        // Share function
+        function shareProfile() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.getElementById('companyName').textContent,
+                    text: 'مراد مسالا جو وپاري پروفائيل ڏسو',
+                    url: window.location.href
+                }).catch(err => {
+                    console.log('Error sharing:', err);
+                    fallbackShare();
+                });
+            } else {
+                fallbackShare();
+            }
+        }
+
+        function fallbackShare() {
+            const companyName = document.getElementById('companyName').textContent;
+            const companyAddress = document.getElementById('companyAddress').textContent;
+            const companyPhone = document.getElementById('companyPhone').textContent;
+            
+            const shareText = `${companyName}\n${companyAddress}\nرابطو: ${companyPhone}\n\nڊائون لوڊ ڪريو: ${window.location.href}`;
+            
+            alert('شيئر ڪرڻ لاءِ هي متن ڪاپي ڪريو:\n\n' + shareText);
+        }
+
+        // PDF Download function
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add logo and title
+            doc.setFontSize(20);
+            doc.setTextColor(40, 40, 40);
+            doc.text(document.getElementById('companyName').textContent, 105, 20, { align: 'center' });
+            
+            // Add basic info
+            doc.setFontSize(12);
+            doc.setTextColor(80, 80, 80);
+            doc.text(document.getElementById('companyAddress').textContent, 105, 30, { align: 'center' });
+            doc.text(`فون: ${document.getElementById('companyPhone').textContent}`, 105, 36, { align: 'center' });
+            
+            // Add horizontal line
+            doc.setDrawColor(200, 200, 200);
+            doc.line(20, 42, 190, 42);
+            
+            // Add sections
+            doc.setFontSize(16);
+            doc.setTextColor(52, 152, 219);
+            doc.text('رابطا', 20, 50);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`اي ميل: ${document.getElementById('companyEmail').textContent}`, 20, 60);
+            
+            // Add business hours table
+            doc.setFontSize(16);
+            doc.setTextColor(52, 152, 219);
+            doc.text('واپار جا وقت', 20, 80);
+            
+            const hoursTable = document.getElementById('businessHoursTable');
+            const hoursData = [];
+            const rows = hoursTable.rows;
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const rowData = [];
+                for (let j = 0; j < row.cells.length; j++) {
+                    rowData.push(row.cells[j].textContent);
+                }
+                hoursData.push(rowData);
+            }
+            
+            doc.autoTable({
+                startY: 85,
+                head: [hoursData[0]],
+                body: hoursData.slice(1),
+                theme: 'grid',
+                headStyles: { fillColor: [52, 152, 219] }
+            });
+            
+            // Save the PDF
+            doc.save('مراد_مسالا_پروفائل.pdf');
+        }
+
+        // Load data when page loads
+        window.onload = loadCompanyData;
+   // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>

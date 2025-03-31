@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS - مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Same header as in your index.html -->
+    </header>
+
+    <main class="pos-container">
+        <div class="pos-products">
+            <div class="pos-header">
+                <div class="search-box">
+                    <input type="text" placeholder="پراڊڪٽ ڳوليو...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="category-tabs">
+                    <button class="tab-btn active">سڀ</button>
+                    <button class="tab-btn">مرچون</button>
+                    <button class="tab-btn">مسالا</button>
+                </div>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/red-chilli-powder.jpg" alt="مرچ پاؤڊر">
+                    </div>
+                    <h3>مرچ پاؤڊر</h3>
+                    <p>₹160/ڪلو</p>
+                    <button class="btn btn-sm btn-primary">شامل ڪريو</button>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/black-pepper.jpg" alt="ڪاري مرچ">
+                    </div>
+                    <h3>ڪاري مرچ</h3>
+                    <p>₹180/ڪلو</p>
+                    <button class="btn btn-sm btn-primary">شامل ڪريو</button>
+                </div>
+                
+                <!-- More products... -->
+            </div>
+        </div>
+        
+        <div class="pos-cart">
+            <div class="cart-header">
+                <h3><i class="fas fa-shopping-cart"></i> ڪارٽ</h3>
+                <div class="customer-select">
+                    <select>
+                        <option>واڳائيندڙ</option>
+                        <option>علي احمد</option>
+                        <option>فاطمه بيگم</option>
+                        <option>نئون گراھڪ</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="cart-items">
+                <div class="cart-item">
+                    <div class="item-info">
+                        <h4>مرچ پاؤڊر</h4>
+                        <p>₹160 x 2 ڪلو</p>
+                    </div>
+                    <div class="item-actions">
+                        <div class="quantity-control">
+                            <button class="qty-btn">-</button>
+                            <span>2</span>
+                            <button class="qty-btn">+</button>
+                        </div>
+                        <span class="item-price">₹320</span>
+                        <button class="btn-icon danger"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="item-info">
+                        <h4>ڪاري مرچ</h4>
+                        <p>₹180 x 1 ڪلو</p>
+                    </div>
+                    <div class="item-actions">
+                        <div class="quantity-control">
+                            <button class="qty-btn">-</button>
+                            <span>1</span>
+                            <button class="qty-btn">+</button>
+                        </div>
+                        <span class="item-price">₹180</span>
+                        <button class="btn-icon danger"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>وڌ:</span>
+                    <span>₹500.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>ٽيڪس:</span>
+                    <span>₹50.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>ڪل:</span>
+                    <span>₹550.00</span>
+                </div>
+                
+                <div class="payment-options">
+                    <button class="btn btn-outline active">
+                        <i class="fas fa-money-bill-wave"></i> نقد
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-credit-card"></i> ڪارڊ
+                    </button>
+                </div>
+                
+                <button class="btn btn-success btn-block">
+                    <i class="fas fa-check"></i> وڪرو مڪمل ڪريو
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // POS specific JavaScript would go here
+        // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>

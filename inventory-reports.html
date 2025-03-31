@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انوينٽري رپورٽ - مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Same header as dashboard -->
+    </header>
+
+    <main>
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-boxes"></i> انوينٽري رپورٽ</h2>
+                <div class="header-actions">
+                    <div class="filter-group">
+                        <select>
+                            <option>سڀ قسم</option>
+                            <option>مرچون</option>
+                            <option>مسالا</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-file-export"></i> برآمد ڪريو
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Row -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-box-open"></i></div>
+                    <h3>ڪل آئيٽم</h3>
+                    <p>48</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 5%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-rupee-sign"></i></div>
+                    <h3>انوينٽري قيمت</h3>
+                    <p>₹84,500.00</p>
+                    <div class="stat-trend neutral">
+                        <i class="fas fa-equals"></i> 0%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h3>گهٽ اسٽاڪ</h3>
+                    <p>5</p>
+                    <div class="stat-trend down">
+                        <i class="fas fa-arrow-down"></i> 2%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-truck"></i></div>
+                    <h3>اڳيون آرڊر</h3>
+                    <p>3</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 50%
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content Grid -->
+            <div class="dashboard-grid">
+                <!-- Inventory Value Chart -->
+                <div class="grid-card chart-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-pie"></i> انوينٽري جي قيمت</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="inventoryValueChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Stock Movement -->
+                <div class="grid-card chart-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> اسٽاڪ حرڪت</h3>
+                        <select class="chart-period">
+                            <option>گذريل 30 ڏينهن</option>
+                            <option>گذريل 3 مهينا</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="stockMovementChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Low Stock Items -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> گهٽ اسٽاڪ آئيٽم</h3>
+                        <a href="stock.html" class="view-all">سڀ ڏسو</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>پراڊڪٽ</th>
+                                    <th>اسٽاڪ</th>
+                                    <th>قيمت</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ڪاري مرچ</td>
+                                    <td class="text-danger">2 ڪلو</td>
+                                    <td>₹180/ڪلو</td>
+                                </tr>
+                                <tr>
+                                    <td>هڊي پاؤڊر</td>
+                                    <td class="text-warning">5 ڪلو</td>
+                                    <td>₹180/ڪلو</td>
+                                </tr>
+                                <tr>
+                                    <td>دار چيني</td>
+                                    <td class="text-warning">3 ڪلو</td>
+                                    <td>₹220/ڪلو</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Recent Stock Updates -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> تازي اسٽاڪ اپڊيٽ</h3>
+                    </div>
+                    <div class="activities-list">
+                        <div class="activity-item">
+                            <div class="activity-icon primary">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>مرچ پاؤڊر شامل ٿيو - 10 ڪلو</p>
+                                <small>28/03/2023 - ₹1,600.00</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>ڪاري مرچ وڪرو ٿيو - 2 ڪلو</p>
+                                <small>27/03/2023 - ₹360.00</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Inventory Value Chart
+        const invValueCtx = document.getElementById('inventoryValueChart').getContext('2d');
+        const inventoryValueChart = new Chart(invValueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['مرچون', 'مسالا', 'مصنوعات', 'ٻيا'],
+                datasets: [{
+                    data: [35000, 28000, 15000, 6500],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Stock Movement Chart
+        const stockMoveCtx = document.getElementById('stockMovementChart').getContext('2d');
+        const stockMovementChart = new Chart(stockMoveCtx, {
+            type: 'line',
+            data: {
+                labels: ['1', '5', '10', '15', '20', '25', '30'],
+                datasets: [{
+                    label: 'مرچ پاؤڊر',
+                    data: [15, 12, 10, 8, 12, 10, 8],
+                    borderColor: '#FF6384',
+                    tension: 0.4
+                }, {
+                    label: 'ڪاري مرچ',
+                    data: [10, 8, 7, 5, 4, 3, 2],
+                    borderColor: '#36A2EB',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        // On login page
+if (localStorage.getItem('murradMasala_loggedIn')) {
+  window.location.href = 'index.html';
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منافعو رپورٽ - مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <header>
+        <!-- Same header as dashboard -->
+    </header>
+
+    <main>
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-money-bill-wave"></i> منافعو رپورٽ</h2>
+                <div class="header-actions">
+                    <div class="date-range-picker">
+                        <input type="text" id="profit-date-range" placeholder="تاريخ چونڊيو" readonly>
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-file-export"></i> برآمد ڪريو
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Row -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-rupee-sign"></i></div>
+                    <h3>ڪل وڪري</h3>
+                    <p>₹24,850.00</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 18%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-receipt"></i></div>
+                    <h3>ڪل خرچ</h3>
+                    <p>₹15,200.00</p>
+                    <div class="stat-trend down">
+                        <i class="fas fa-arrow-down"></i> 5%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3>منافعو</h3>
+                    <p>₹9,650.00</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 25%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-percentage"></i></div>
+                    <h3>منافعو شرح</h3>
+                    <p>38.8%</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> 3%
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content Grid -->
+            <div class="dashboard-grid">
+                <!-- Profit Trend Chart -->
+                <div class="grid-card chart-card wide">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> منافعو رجحان</h3>
+                        <select class="chart-period">
+                            <option>گذريل 6 مهينا</option>
+                            <option>گذريل سال</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="profitTrendChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Profit by Category -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tags"></i> قسمن جي مطابق منافعو</h3>
+                    </div>
+                    <div class="chart-container pie">
+                        <canvas id="profitByCategoryChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Expense Breakdown -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-receipt"></i> خرچ جي وڌا</h3>
+                    </div>
+                    <div class="chart-container pie">
+                        <canvas id="expenseBreakdownChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Top Profitable Products -->
+                <div class="grid-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> وڌ ۾ وڌ منافعو ڏيندڙ</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>پراڊڪٽ</th>
+                                    <th>منافعو</th>
+                                    <th>شرح</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ڪاري مرچ</td>
+                                    <td>₹3,150.00</td>
+                                    <td class="text-success">42%</td>
+                                </tr>
+                                <tr>
+                                    <td>مرچ پاؤڊر</td>
+                                    <td>₹2,820.00</td>
+                                    <td class="text-success">40%</td>
+                                </tr>
+                                <tr>
+                                    <td>هڊي پاؤڊر</td>
+                                    <td>₹1,890.00</td>
+                                    <td class="text-success">38%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize Date Range Picker
+        flatpickr("#profit-date-range", {
+            mode: "range",
+            dateFormat: "d/m/Y",
+            defaultDate: ["1/3/2023", "31/3/2023"]
+        });
+
+        // Profit Trend Chart
+        const profitTrendCtx = document.getElementById('profitTrendChart').getContext('2d');
+        const profitTrendChart = new Chart(profitTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['آڪٽوبر', 'نومبر', 'ڊسمبر', 'جنوري', 'فيبروري', 'مارچ'],
+                datasets: [{
+                    label: 'وڪري',
+                    data: [18000, 20000, 22000, 19000, 21000, 24850],
+                    borderColor: '#4BC0C0',
+                    backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'منافعو',
+                    data: [6500, 7200, 8000, 7000, 7500, 9650],
+                    borderColor: '#FFCE56',
+                    backgroundColor: 'rgba(255, 206, 86, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Profit by Category Chart
+        const profitCatCtx = document.getElementById('profitByCategoryChart').getContext('2d');
+        const profitByCategoryChart = new Chart(profitCatCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['مرچون', 'مسالا', 'مصنوعات', 'ٻيا'],
+                datasets: [{
+                    data: [4200, 3200, 1500, 750],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Expense Breakdown Chart
+        const expenseCtx = document.getElementById('expenseBreakdownChart').getContext('2d');
+        const expenseBreakdownChart = new Chart(expenseCtx, {
+            type: 'pie',
+            data: {
+                labels: ['پراڊڪٽس', 'تنخواه', 'ڪراي', 'ٻيا'],
+                datasets: [{
+                    data: [10500, 2500, 1500, 700],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

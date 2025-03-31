@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سيٽنگز - مراد مسالا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .settings-page {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        .action-buttons {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1>سيٽنگز</h1>
+    </header>
+
+    <main class="settings-page">
+        <!-- Database Mode Section -->
+        <section class="database-settings">
+            <h2><i class="fas fa-database"></i> ڊيٽا بيس جو موڊ</h2>
+            
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="dbMode" value="local" checked> 
+                    لوڪل اسٽوريج (آف لائن)
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="dbMode" value="server"> 
+                    SQLite/سرور ڊيٽا بیس)آنلاين()  
+                </label>
+            </div>
+            
+            <div id="serverConfig" class="hidden">
+                <div class="form-group">
+                    <label>سرور جو پتو (API URL)</label>
+                    <input type="url" id="serverUrl" placeholder="https://example.com/api">
+                </div>
+                <button class="btn btn-success" onclick="testConnection()">
+                    <i class="fas fa-plug"></i> ڪنيڪشن ٽيسٽ ڪريو
+                </button>
+            </div>
+            
+            <button class="btn btn-primary" onclick="saveSettings()">
+                <i class="fas fa-save"></i> محفوظ ڪريو
+            </button>
+        </section>
+
+        <!-- Backup/Restore Section -->
+        <section class="action-buttons">
+            <h2><i class="fas fa-database"></i> ڊيٽا مينجمينٽ</h2>
+            
+            <div class="form-group">
+                <button class="btn btn-success" onclick="backupData()">
+                    <i class="fas fa-file-export"></i> بيڪ اپ ڪريو
+                </button>
+                <button class="btn btn-warning" onclick="document.getElementById('restoreFile').click()">
+                    <i class="fas fa-file-import"></i> ري اسٽور ڪريو
+                </button>
+                <input type="file" id="restoreFile" accept=".json" class="hidden" onchange="restoreData(this)">
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-danger" onclick="resetData()">
+                    <i class="fas fa-trash-alt"></i> صاف ڪريو (سڀ ڊيٽا حذف ڪريو)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { AppConfig, setDatabaseMode, setServerConnection } from './js/config.js';
+        
+        // DOM لوڈ ہونے پر
+        document.addEventListener('DOMContentLoaded', function() {
+            // موجودہ موڈ چیک کریں
+            const currentMode = AppConfig.databaseMode;
+            document.querySelector(`input[name="dbMode"][value="${currentMode}"]`).checked = true;
+            
+            if (currentMode === 'server') {
+                document.getElementById('serverConfig').classList.remove('hidden');
+                document.getElementById('serverUrl').value = AppConfig.serverDatabase.apiUrl || '';
+            }
+            
+            // ریڈیو بٹن ایونٹ
+            document.querySelectorAll('input[name="dbMode"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    document.getElementById('serverConfig').classList.toggle('hidden', this.value !== 'server');
+                });
+            });
+        });
+        
+        // کنفیگ سیو کرنے کا فنکشن
+        window.saveSettings = function() {
+            const dbMode = document.querySelector('input[name="dbMode"]:checked').value;
+            setDatabaseMode(dbMode);
+            
+            if (dbMode === 'server') {
+                const serverUrl = document.getElementById('serverUrl').value;
+                if (serverUrl) {
+                    setServerConnection(serverUrl);
+                    alert('سيٽنگز محفوظ ڪريو ويون آهن!');
+                } else {
+                    alert('مهرباني ڪري سرور جو پتو داخل ڪريو!');
+                }
+            } else {
+                alert('لوڪل موڊ ۾ سيٽنگز محفوظ ڪريو ويون آهن!');
+            }
+        };
+        
+        // کنکشن ٹیسٹ
+        window.testConnection = async function() {
+            const serverUrl = document.getElementById('serverUrl').value;
+            if (!serverUrl) {
+                alert('مهرباني ڪري سرور جو پتو داخل ڪريو!');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${serverUrl}/health`);
+                if (response.ok) {
+                    alert('ڪنيڪشن ڪامياب! سرور جواب ڏئي رهيو آهي.');
+                } else {
+                    alert('سرور جواب نه ڏنو. اسٽيٽس ڪوڊ: ' + response.status);
+                }
+            } catch (error) {
+                alert('ڪنيڪشن ناڪام: ' + error.message);
+            }
+        };
+        
+        // ڊيٽا بيڪ اپ
+        window.backupData = function() {
+            const allData = {};
+            
+            // تمام لوکل سٹوریج ڈیٹا اکٹھا کریں
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(AppConfig.localStorage.prefix)) {
+                    allData[key] = localStorage.getItem(key);
+                }
+            }
+            
+            // JSON فائل کے طور پر ڈاؤنلوڈ کریں
+            const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `murrad_masala_backup_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('ڊيٽا جو بيڪ اپ ڊائون لوڊ ٿي ويو آهي!');
+        };
+        
+        // ڊيٽا ري اسٽور
+        window.restoreData = function(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            if (!confirm('ڇا توهان پڪ آهيو ته بيڪ اپ ڊيٽا ري اسٽور ڪرڻ چاهيو ٿا؟ موجوده ڊيٽا مٽي ويندي.')) {
+                input.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const backupData = JSON.parse(e.target.result);
+                    
+                    // پہلے موجودہ ڈیٹا صاف کریں
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key.startsWith(AppConfig.localStorage.prefix)) {
+                            localStorage.removeItem(key);
+                        }
+                    }
+                    
+                    // بيڪ اپ سے ڈیٹا ری اسٹور کریں
+                    Object.keys(backupData).forEach(key => {
+                        localStorage.setItem(key, backupData[key]);
+                    });
+                    
+                    alert('ڊيٽا ڪاميابي سان ري اسٽور ٿي ويو آهي! صفحو ري لوڊ ٿي رهيو آهي...');
+                    setTimeout(() => location.reload(), 1000);
+                } catch (error) {
+                    alert('بيڪ اپ فائل خراب آهي: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            input.value = '';
+        };
+        
+        // ڊيٽا صاف ڪريو
+        window.resetData = function() {
+            if (!confirm('ڇا توهان پڪ آهيو ته سڀ ڊيٽا حذف ڪرڻ چاهيو ٿا؟ هي عمل واپس نه ٿيندو.')) {
+                return;
+            }
+            
+            // صرف اپلیکیشن کے ڈیٹا کو صاف کریں
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(AppConfig.localStorage.prefix)) {
+                    localStorage.removeItem(key);
+                }
+            }
+            
+            alert('سڀ ڊيٽا کاميابي سان حذف ٿي ويو آهي! صفحو ري لوڊ ٿي رهيو آهي...');
+            setTimeout(() => location.reload(), 1000);
+        };
+        
+        // مینیو ٹوگل (اگر ضرورت ہو)
+        window.toggleMenu = function() {
+            console.log('Menu toggled');
+            // اپنی مینیو لاجک یہاں شامل کریں
+        };
+    </script>
+</body>
+</html>
